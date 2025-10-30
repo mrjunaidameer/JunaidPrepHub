@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junaid's Admissions Test Prep Hub</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script type="module" src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Font for Professional Look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        :root {
+            --primary-color: #1e3a8a; /* Dark Blue */
+            --accent-color: #3b82f6; /* Medium Blue */
+            --danger-color: #ef4444; /* Red */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        /* Styling for the main content area */
+        #content {
+            min-height: calc(100vh - 64px); /* Full height minus header */
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Custom Notification Style */
+        #notification-box {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .test-card-link {
+            transition: all 0.3s;
+        }
+
+        .test-card-link:hover .test-card-inner {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Styling for the radio buttons/options */
+        .option-label {
+            cursor: pointer;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-label:hover {
+            border-color: #bfdbfe; /* Light blue on hover */
+            background-color: #f9fafb;
+        }
+
+        input[type="radio"]:checked + .option-label {
+            background-color: #eff6ff; /* Very light blue */
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        input[type="radio"] {
+            /* Hide the default radio button */
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Custom checkmark for selected option */
+        .option-label::before {
+            content: '';
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 1rem;
+            border-radius: 50%;
+            border: 2px solid #9ca3af;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        input[type="radio"]:checked + .option-label::before {
+            border-color: var(--accent-color);
+            background-color: var(--accent-color);
+            box-shadow: inset 0 0 0 4px white;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header / Navigation Bar -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-gray-900 flex items-center">
+                <span class="w-6 h-6 mr-2 text-indigo-600" data-lucide="book-open-text"></span>
+                <span class="text-indigo-600">Junaid</span><span class="text-gray-900">PrepHub</span>
+            </h1>
+            <div id="header-user-info" class="hidden text-sm text-gray-600 space-x-4">
+                <span id="header-name" class="font-medium text-indigo-700"></span>
+                <span id="header-rollno"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- 1. Home/Login Screen -->
+        <section id="home-page" class="page flex flex-col items-center justify-center min-h-[70vh]">
+            <div class="card p-8 md:p-12 w-full max-w-lg text-center">
+                <h2 class="text-4xl font-bold mb-4 text-gray-900">Welcome, Future Scholar!</h2>
+                <p class="text-lg text-gray-600 mb-8">Please enter your details to access the test preparation material.</p>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <input type="text" id="full-name" placeholder="Full Name (e.g., Junaid Ameer)" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+                    </div>
+                    <div>
+                        <input type="text" id="roll-no" placeholder="Roll No (e.g., BSCS-F23-123)" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+                    </div>
+                    <button type="submit"
+                        class="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-150">
+                        Start Exploring
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2. Welcome Page -->
+        <section id="welcome-page" class="page hidden">
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg mb-8">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">
+                    Welcome, <span id="welcome-name" class="text-indigo-600"></span>!
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3 flex items-center">
+                            <span class="w-5 h-5 mr-2 text-indigo-500" data-lucide="target"></span>
+                            What You'll Get Here
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            This platform is your comprehensive resource for university admission tests. We offer focused MCQs across various subjects to sharpen your skills and ensure you are fully prepared.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><strong class="font-medium">Mathematics:</strong> Core concepts, Algebra, and Arithmetic.</div>
+                            </div>
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><strong class="font-medium">Computer Science:</strong> Fundamentals and Programming logic.</div>
+                            </div>
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><strong class="font-medium">English & Grammar:</strong> Vocabulary, sentence structure, and comprehension.</div>
+                            </div>
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><strong class="font-medium">IQ & Logic:</strong> Critical reasoning and quantitative aptitude.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200">
+                        <h3 class="text-xl font-semibold text-indigo-800 mb-4 flex items-center">
+                             <span class="w-5 h-5 mr-2" data-lucide="graduation-cap"></span>
+                            Why Prepare With Us?
+                        </h3>
+                        <p class="text-indigo-700 leading-relaxed">
+                            Our goal is simple: to help you succeed in high-stakes university admission exams like **IUB NAT, GAT, NTS**, and others. The tests are designed to mimic the actual exam environment, complete with time limits and detailed scoring, ensuring you walk into your real exam with confidence.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row gap-4">
+                    <button onclick="navigate('explore-page')"
+                        class="flex-1 flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150 shadow-lg">
+                        <span class="w-5 h-5 mr-2" data-lucide="search"></span>
+                        Explore Tests
+                    </button>
+                    <button onclick="navigate('info-page')"
+                        class="flex-1 flex items-center justify-center px-6 py-3 border border-indigo-600 text-base font-medium rounded-lg text-indigo-600 bg-white hover:bg-indigo-50 transition duration-150 shadow-md">
+                        <span class="w-5 h-5 mr-2" data-lucide="info"></span>
+                        Get Info
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Get Info Page -->
+        <section id="info-page" class="page hidden">
+            <button onclick="navigate('welcome-page')" class="text-indigo-600 hover:text-indigo-800 mb-6 flex items-center">
+                <span class="w-5 h-5 mr-1" data-lucide="arrow-left"></span>
+                Back to Welcome
+            </button>
+            <div class="card p-8 md:p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 border-b pb-3 flex items-center">
+                    <span class="w-6 h-6 mr-3 text-indigo-600" data-lucide="building-2"></span>
+                    About This Platform
+                </h2>
+
+                <div class="space-y-6 text-gray-700 text-lg">
+                    <h3 class="text-2xl font-semibold text-gray-800">Site Purpose</h3>
+                    <p>
+                        The primary goal of the **Admissions Test Preparation Hub** is to provide university aspirants with high-quality, timed, and categorized practice tests. We aim to simulate the real entrance exam environment for tests such as **IUB NAT, GAT, and NTS**, allowing students to build confidence, identify weaknesses, and track their performance effectively before taking the actual admission test.
+                    </p>
+
+                    <h3 class="text-2xl font-semibold text-gray-800 pt-4">Created By</h3>
+                    <div class="flex items-center space-x-4 bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-600">
+                        <span class="w-8 h-8 text-indigo-600" data-lucide="user-circle"></span>
+                        <div>
+                            <p class="font-bold text-xl text-gray-900">Junaid Ameer</p>
+                            <p class="text-indigo-700">Student of BS Cyber Security at The Islamia University of Bahawalpur (IUB)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Explore Tests Page -->
+        <section id="explore-page" class="page hidden">
+            <div class="mb-8">
+                <button onclick="navigate('welcome-page')" class="text-indigo-600 hover:text-indigo-800 mb-6 flex items-center">
+                    <span class="w-5 h-5 mr-1" data-lucide="arrow-left"></span>
+                    Back to Welcome
+                </button>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Explore Available Tests</h2>
+                <p class="text-gray-600">Select a difficulty level to view the relevant tests.</p>
+            </div>
+
+            <!-- Level Tabs -->
+            <div class="flex border-b border-gray-200 mb-8 overflow-x-auto">
+                <button data-level="Easy" onclick="filterTests('Easy')" class="level-tab px-6 py-3 text-lg font-medium border-b-2 border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-300 transition duration-150 whitespace-nowrap">Easy</button>
+                <button data-level="Intermediate" onclick="filterTests('Intermediate')" class="level-tab px-6 py-3 text-lg font-medium border-b-2 border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-300 transition duration-150 whitespace-nowrap">Intermediate</button>
+                <button data-level="Advanced" onclick="filterTests('Advanced')" class="level-tab px-6 py-3 text-lg font-medium border-b-2 border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-300 transition duration-150 whitespace-nowrap">Advanced</button>
+            </div>
+
+            <!-- Test Cards Container -->
+            <div id="test-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Test cards will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- 5. Test Taking Page -->
+        <section id="test-page" class="page hidden">
+            <div class="flex justify-between items-start mb-6 pb-3 border-b border-gray-200">
+                <div>
+                    <h2 id="test-title" class="text-3xl font-bold text-gray-900"></h2>
+                    <p class="text-gray-500 text-lg">Questions: <span id="test-question-count"></span> | Pages: <span id="test-page-count"></span></p>
+                </div>
+                <div class="flex flex-col items-end space-y-2">
+                    <div id="timer" class="text-2xl font-mono px-4 py-2 rounded-lg bg-red-100 text-red-600 shadow-inner">00:00</div>
+                    <!-- Stop Test Button -->
+                    <button onclick="confirmStopTest()" class="text-xs font-semibold px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-150">
+                        Stop Test
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Questions Container -->
+            <div id="quiz-questions-container" class="space-y-8 mb-10">
+                <!-- 3 MCQs will be injected here -->
+            </div>
+
+            <!-- Pagination and Submit Button -->
+            <div class="flex justify-between items-center mt-8">
+                <button id="prev-page-btn" onclick="changePage(-1)" disabled
+                    class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span class="w-5 h-5 mr-1" data-lucide="chevron-left"></span>
+                    Previous Page
+                </button>
+                <p class="text-lg font-medium text-gray-600">Page <span id="current-mcq-page">1</span></p>
+                <button id="next-page-btn" onclick="changePage(1)"
+                    class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150">
+                    Next Page
+                    <span class="w-5 h-5 ml-1" data-lucide="chevron-right"></span>
+                </button>
+                <button id="submit-btn" onclick="confirmSubmitTest()"
+                    class="hidden px-8 py-3 bg-green-600 text-white font-bold rounded-lg shadow-xl hover:bg-green-700 transition duration-150">
+                    <span class="w-5 h-5 mr-1" data-lucide="send"></span>
+                    Submit Test
+                </button>
+            </div>
+        </section>
+        
+        <!-- 6. Result Page -->
+        <section id="result-page" class="page hidden flex flex-col items-center">
+            <div class="card p-8 md:p-12 w-full max-w-2xl text-center">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-6">Test Complete!</h2>
+
+                <div id="result-score-box" class="p-6 rounded-lg mb-8 shadow-inner bg-indigo-50 border border-indigo-200">
+                    <p class="text-2xl font-semibold text-gray-600 mb-2">Your Score</p>
+                    <p id="final-score" class="text-7xl font-bold text-indigo-600 leading-none">0/30</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 text-left mb-8">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Correct Answers</p>
+                        <p id="correct-count" class="text-3xl font-bold text-green-600">0</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Time Taken</p>
+                        <p id="time-taken" class="text-3xl font-bold text-red-600">00:00</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Wrong Answers</p>
+                        <p id="wrong-count" class="text-3xl font-bold text-red-600">0</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Unattempted</p>
+                        <p id="unattempted-count" class="text-3xl font-bold text-gray-600">0</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="navigate('explore-page')"
+                        class="flex-1 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150">
+                        Go Back to Tests
+                    </button>
+                    <button onclick="navigate('answer-review-page')"
+                        class="flex-1 px-6 py-3 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition duration-150">
+                        View Correct/Wrong Answers
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Answer Review Page -->
+        <section id="answer-review-page" class="page hidden">
+            <button onclick="navigate('result-page')" class="text-indigo-600 hover:text-indigo-800 mb-6 flex items-center">
+                <span class="w-5 h-5 mr-1" data-lucide="arrow-left"></span>
+                Back to Results
+            </button>
+            <h2 id="review-title" class="text-3xl font-bold text-gray-900 mb-6 border-b pb-3">Review Answers: </h2>
+            <div id="review-container" class="space-y-8">
+                <!-- Answer review items will be injected here -->
+            </div>
+            <div class="mt-8 text-center">
+                <button onclick="navigate('explore-page')"
+                    class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150">
+                    Return to Test Selection
+                </button>
+            </div>
+        </section>
+
+
+        <!-- Custom Notification/Confirmation Modal -->
+        <div id="notification-box" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 hidden z-[100]">
+            <div id="notification-content" class="bg-white p-8 rounded-xl max-w-md w-full shadow-2xl text-center">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- DATA STRUCTURES ---
+
+        // The user-provided 30 MCQs, cleaned and structured.
+        const mcqs_30_sample = [
+            { id: 1, q: "A number x increases by itself and added to x + 5 equals 17. What is the number?", options: ["4", "5", "6", "7"], ans: 2, subject: "Math", category: "Arithmetic & Algebra" }, // User marked 6 (index 2)
+            { id: 2, q: "If the sum of three numbers is 93, what is their average?", options: ["27", "31", "29", "33"], ans: 1, subject: "Math", category: "Arithmetic" },
+            { id: 3, q: "What is the percent discount on trousers marked from $160 to $120?", options: ["15%", "25%", "30%", "35%"], ans: 1, subject: "Math", category: "Percentage" },
+            { id: 4, q: "Your views are identical ___ mine.", options: ["with", "for", "to", "of"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 5, q: "He married ___ money.", options: ["at", "with", "for", "from"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 6, q: "Please distribute the toffees ___ the children.", options: ["between", "on", "among", "for"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 7, q: "It began to dawn ___ me that the murder was done in our midst.", options: ["for", "from", "by", "on"], ans: 3, subject: "English", category: "Phrasal Verbs" },
+            { id: 8, q: "Why ___ you break your promise?", options: ["do", "did", "have", "does"], ans: 1, subject: "English", category: "Tenses" },
+            { id: 9, q: "The ratio 35 : 84 in simplest form is", options: ["7 : 14", "5 : 14", "5 : 12", "7 : 15"], ans: 2, subject: "Math", category: "Ratio" },
+            { id: 10, q: "Pen is to point as needle is to ___", options: ["pin", "sew", "stitch", "cloth"], ans: 1, subject: "IQ", category: "Analogy" },
+            { id: 11, q: "What percent of 3/5 is 3/10?", options: ["25%", "30%", "50%", "75%"], ans: 2, subject: "Math", category: "Percentage" },
+            { id: 12, q: "I ___ a new bike yesterday.", options: ["buy", "buying", "bought", "have bought"], ans: 2, subject: "English", category: "Tenses" },
+            { id: 13, q: "P is the daughter of K and is married to G. X and G are brothers. How is P related to G?", options: ["Sister", "Wife", "Mother", "Cousin"], ans: 1, subject: "IQ", category: "Blood Relations" },
+            { id: 14, q: "The average of three numbers is 15. What is their sum?", options: ["25", "30", "35", "45"], ans: 3, subject: "Math", category: "Arithmetic" },
+            { id: 15, q: "Make ___ hurry or we shall miss the train.", options: ["at", "of", "haste", "late"], ans: 2, subject: "English", category: "Idioms" },
+            { id: 16, q: "0.036 in terms of percent is", options: ["0.36%", "36%", "3.6%", "0.0036%"], ans: 2, subject: "Math", category: "Percentage" },
+            { id: 17, q: "He has been sleeping ___ five hours.", options: ["since", "for", "till", "from"], ans: 1, subject: "English", category: "Prepositions" },
+            { id: 18, q: "Cats sleep ___ the day and move out at night.", options: ["on", "at", "during", "from"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 19, q: "The average rent of seven shops is Rs. 2300. What is the total rent?", options: ["14,900", "16,100", "17,000", "15,900"], ans: 1, subject: "Math", category: "Arithmetic" },
+            { id: 20, q: "Choose the correctly spelled word.", options: ["Caracteristics", "Charactristics", "Characteristics", "Charactaristics"], ans: 2, subject: "English", category: "Spelling" },
+            { id: 21, q: "When they arrived here, the entry test ___ begun.", options: ["have", "had", "has", "was"], ans: 1, subject: "English", category: "Tenses" },
+            { id: 22, q: "I have not been on holiday ___ 1996.", options: ["for", "at", "since", "from"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 23, q: "They have been playing ___ two hours.", options: ["since", "on", "for", "from"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 24, q: "I have not been to London ___ three years.", options: ["since", "on", "for", "in"], ans: 2, subject: "English", category: "Prepositions" },
+            { id: 25, q: "Choose the correctly spelled word.", options: ["Acurate", "Accurat", "Accurate", "Accurrate"], ans: 2, subject: "English", category: "Spelling" },
+            { id: 26, q: "Find the mode from: 11, 13, 15, 17, 17, 17, 17, 18, 18, 19, 19, 19.", options: ["15", "18", "19", "17"], ans: 3, subject: "Math", category: "Statistics" },
+            { id: 27, q: "25 is what percent of 75?", options: ["25%", "50%", "33.33%", "75%"], ans: 2, subject: "Math", category: "Percentage" },
+            { id: 28, q: "Boat is to water as plane is to ___", options: ["land", "air", "sky", "pilot"], ans: 1, subject: "IQ", category: "Analogy" },
+            { id: 29, q: "Which number is different from others: 3, 5, 7, 9, 11, 13?", options: ["3", "7", "9", "11"], ans: 2, subject: "IQ", category: "Series Logic" },
+            { id: 30, q: "I was amazed ___ his behavior.", options: ["for", "from", "by", "at"], ans: 3, subject: "English", category: "Prepositions" }
+        ];
+
+        // Placeholder function to generate generic MCQs for other tests
+        const generatePlaceholderMCQs = (count, subject, level) => {
+            const arr = [];
+            for (let i = 1; i <= count; i++) {
+                arr.push({
+                    id: i,
+                    q: `(${level} ${subject}) Placeholder question number ${i}. This is an advanced concept for the user.`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    ans: 0, // Set 'A' as correct for placeholders
+                    subject: subject,
+                    category: "Placeholder Topic"
+                });
+            }
+            return arr;
+        };
+
+        const TEST_DURATION_SECONDS = 45 * 60; // 45 minutes
+
+        const allTests = [
+            // --- EASY LEVEL (1) ---
+            { id: 'math-easy-1', title: 'Basic Algebra & Logic', subject: 'Math', level: 'Easy', description: 'Foundational test covering basic math concepts, ratios, and logic.', mcqs: mcqs_30_sample, duration: TEST_DURATION_SECONDS },
+            { id: 'english-easy-1', title: 'Basic Grammar & Vocabulary', subject: 'English', level: 'Easy', description: 'Covers essential prepositions, tenses, and common vocabulary.', mcqs: generatePlaceholderMCQs(30, 'English', 'Easy'), duration: TEST_DURATION_SECONDS },
+            { id: 'iq-easy-1', title: 'General Reasoning', subject: 'IQ', level: 'Easy', description: 'Simple analogies, series completion, and elementary logical deductions.', mcqs: generatePlaceholderMCQs(30, 'IQ', 'Easy'), duration: TEST_DURATION_SECONDS },
+            { id: 'computer-easy-1', title: 'Computer Fundamentals', subject: 'Computer', level: 'Easy', description: 'Basic hardware, software, and networking concepts.', mcqs: generatePlaceholderMCQs(30, 'Computer', 'Easy'), duration: TEST_DURATION_SECONDS },
+
+            // --- INTERMEDIATE LEVEL (2) ---
+            { id: 'math-intermediate-1', title: 'Intermediate Functions & Stats', subject: 'Math', level: 'Intermediate', description: 'Medium difficulty problems involving functions, probability, and statistics.', mcqs: generatePlaceholderMCQs(30, 'Math', 'Intermediate'), duration: TEST_DURATION_SECONDS },
+            { id: 'english-intermediate-1', title: 'Sentence Correction & Syntax', subject: 'English', level: 'Intermediate', description: 'Focuses on complex sentence structure, parallelism, and advanced grammar rules.', mcqs: generatePlaceholderMCQs(30, 'English', 'Intermediate'), duration: TEST_DURATION_SECONDS },
+            { id: 'iq-intermediate-1', title: 'Critical Reasoning & Data', subject: 'IQ', level: 'Intermediate', description: 'Data sufficiency, assumptions, and critical thinking scenarios.', mcqs: generatePlaceholderMCQs(30, 'IQ', 'Intermediate'), duration: TEST_DURATION_SECONDS },
+            { id: 'computer-intermediate-1', title: 'Programming Logic (Intro)', subject: 'Computer', level: 'Intermediate', description: 'Basic data structures, algorithms, and logical flow of programming.', mcqs: generatePlaceholderMCQs(30, 'Computer', 'Intermediate'), duration: TEST_DURATION_SECONDS },
+
+            // --- ADVANCED LEVEL (3) ---
+            { id: 'math-advanced-1', title: 'Calculus & Geometry', subject: 'Math', level: 'Advanced', description: 'High difficulty questions from calculus limits, derivatives, and advanced plane geometry.', mcqs: generatePlaceholderMCQs(30, 'Math', 'Advanced'), duration: TEST_DURATION_SECONDS },
+            { id: 'english-advanced-1', title: 'Reading Comprehension', subject: 'English', level: 'Advanced', description: 'Lengthy passages followed by inference and application questions.', mcqs: generatePlaceholderMCQs(30, 'English', 'Advanced'), duration: TEST_DURATION_SECONDS },
+            { id: 'iq-advanced-1', title: 'Complex Puzzles', subject: 'IQ', level: 'Advanced', description: 'Seating arrangements, coded language, and complex pattern recognition.', mcqs: generatePlaceholderMCQs(30, 'IQ', 'Advanced'), duration: TEST_DURATION_SECONDS },
+            { id: 'computer-advanced-1', title: 'Data Structures & OOP', subject: 'Computer', level: 'Advanced', description: 'Questions on advanced data structures, efficiency, and Object-Oriented Programming principles.', mcqs: generatePlaceholderMCQs(30, 'Computer', 'Advanced'), duration: TEST_DURATION_SECONDS },
+        ];
+
+
+        // --- STATE MANAGEMENT ---
+        let state = {
+            currentPage: 'home-page',
+            userData: { name: '', rollno: '' },
+            currentTest: null, // The test object being taken
+            userAnswers: {}, // Stores { mcq_id: selected_option_index }
+            mcqPage: 1,
+            mcqsPerPage: 3,
+            timer: null, // Interval ID for the timer
+            timeLeft: TEST_DURATION_SECONDS, // Time remaining in seconds
+            results: null,
+            selectedLevel: 'Easy'
+        };
+
+        // --- NAVIGATION & ROUTING ---
+
+        const updateHeader = () => {
+            const headerInfo = document.getElementById('header-user-info');
+            if (state.userData.name) {
+                document.getElementById('header-name').textContent = state.userData.name;
+                document.getElementById('header-rollno').textContent = `(${state.userData.rollno})`;
+                headerInfo.classList.remove('hidden');
+            } else {
+                headerInfo.classList.add('hidden');
+            }
+            // Update lucide icons
+            lucide.createIcons();
+        };
+
+        const navigate = (pageId) => {
+            // Stop timer if leaving the test page
+            if (state.currentPage === 'test-page' && pageId !== 'test-page') {
+                stopTimer();
+            }
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Show the requested page
+            const nextPage = document.getElementById(pageId);
+            if (nextPage) {
+                nextPage.classList.remove('hidden');
+                state.currentPage = pageId;
+            }
+
+            // Page-specific initialization
+            if (pageId === 'welcome-page') {
+                document.getElementById('welcome-name').textContent = state.userData.name;
+            } else if (pageId === 'explore-page') {
+                // Initialize the explore page to the last selected level
+                filterTests(state.selectedLevel);
+            } else if (pageId === 'test-page') {
+                // Timer will start when test is loaded
+                if (state.currentTest && !state.timer) {
+                    loadMcqPage(state.mcqPage);
+                    startTimer();
+                }
+            } else if (pageId === 'result-page') {
+                displayResults();
+            } else if (pageId === 'answer-review-page') {
+                displayAnswerReview();
+            }
+
+            // Update lucide icons for the new page content
+            lucide.createIcons();
+            window.scrollTo(0, 0); // Scroll to top on navigation
+        };
+
+        // --- LOGIN PAGE LOGIC ---
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('full-name').value.trim();
+            const rollNo = document.getElementById('roll-no').value.trim();
+
+            if (fullName && rollNo) {
+                state.userData.name = fullName;
+                state.userData.rollno = rollNo;
+                updateHeader();
+                navigate('welcome-page');
+            } else {
+                showNotification("Error", "Please enter your Full Name and Roll No to continue.", "error");
+            }
+        });
+
+        // --- EXPLORE TESTS LOGIC ---
+
+        const filterTests = (level) => {
+            state.selectedLevel = level;
+            const container = document.getElementById('test-cards-container');
+            container.innerHTML = '';
+            
+            // Highlight the correct tab
+            document.querySelectorAll('.level-tab').forEach(tab => {
+                tab.classList.remove('border-indigo-600', 'text-indigo-600');
+                tab.classList.add('border-transparent', 'text-gray-500');
+                if (tab.dataset.level === level) {
+                    tab.classList.add('border-indigo-600', 'text-indigo-600');
+                    tab.classList.remove('border-transparent', 'text-gray-500');
+                }
+            });
+
+            const filteredTests = allTests.filter(test => test.level === level);
+
+            if (filteredTests.length === 0) {
+                container.innerHTML = `<p class="col-span-3 text-center text-lg text-gray-500 py-10">No tests found for the ${level} level yet. Check back soon!</p>`;
+                return;
+            }
+
+            filteredTests.forEach(test => {
+                container.innerHTML += createTestCard(test);
+            });
+            lucide.createIcons(); // Re-render icons in new cards
+        };
+
+        const createTestCard = (test) => {
+            return `
+                <div class="test-card-link card p-6 flex flex-col justify-between border-t-4 border-${test.level === 'Easy' ? 'green' : test.level === 'Intermediate' ? 'yellow' : 'red'}-500 transition duration-300">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-semibold uppercase text-gray-500">${test.subject}</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">${test.level}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">${test.title}</h3>
+                        <p class="text-gray-600 text-sm mb-4">${test.description}</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                            <span><span class="w-4 h-4 inline-block align-text-bottom mr-1" data-lucide="check-circle-2"></span>${test.mcqs.length} MCQs</span>
+                            <span><span class="w-4 h-4 inline-block align-text-bottom mr-1" data-lucide="clock"></span>${test.duration / 60} min</span>
+                        </div>
+                        <button onclick="startTest('${test.id}')"
+                            class="w-full mt-2 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
+                            Attempt Test
+                        </button>
+                    </div>
+                </div>
+            `;
+        };
+
+        // --- TEST MANAGEMENT LOGIC ---
+
+        const startTest = (testId) => {
+            const test = allTests.find(t => t.id === testId);
+            if (!test) return;
+
+            state.currentTest = test;
+            state.userAnswers = {};
+            state.mcqPage = 1;
+            state.timeLeft = test.duration; // Reset time
+            document.getElementById('test-title').textContent = `${test.title} (${test.subject} - ${test.level})`;
+            document.getElementById('test-question-count').textContent = test.mcqs.length;
+            
+            const totalPages = Math.ceil(test.mcqs.length / state.mcqsPerPage);
+            document.getElementById('test-page-count').textContent = totalPages;
+            
+            navigate('test-page');
+        };
+
+        const loadMcqPage = (pageNumber) => {
+            if (!state.currentTest) return;
+
+            const startIndex = (pageNumber - 1) * state.mcqsPerPage;
+            const endIndex = startIndex + state.mcqsPerPage;
+            const pageMCQs = state.currentTest.mcqs.slice(startIndex, endIndex);
+
+            const container = document.getElementById('quiz-questions-container');
+            container.innerHTML = '';
+
+            pageMCQs.forEach((mcq, indexInPage) => {
+                container.innerHTML += createMcqHtml(mcq, startIndex + indexInPage);
+            });
+            
+            // Restore previous selections
+            pageMCQs.forEach(mcq => {
+                const selectedIndex = state.userAnswers[mcq.id];
+                if (selectedIndex !== undefined) {
+                    const input = document.getElementById(`mcq-${mcq.id}-option-${selectedIndex}`);
+                    if (input) input.checked = true;
+                }
+            });
+
+            updatePaginationButtons();
+            document.getElementById('current-mcq-page').textContent = pageNumber;
+            lucide.createIcons();
+        };
+
+        const createMcqHtml = (mcq, globalIndex) => {
+            const optionsHtml = mcq.options.map((option, index) => `
+                <div class="relative">
+                    <input type="radio" id="mcq-${mcq.id}-option-${index}" name="mcq-${mcq.id}" 
+                           value="${index}" onchange="saveAnswer(${mcq.id}, ${index})" class="hidden">
+                    <label for="mcq-${mcq.id}-option-${index}" class="option-label">
+                        <span class="font-semibold mr-4">${String.fromCharCode(65 + index)})</span> ${option}
+                    </label>
+                </div>
+            `).join('');
+
+            return `
+                <div class="card p-6 border-l-4 border-indigo-500">
+                    <p class="text-sm font-medium text-indigo-600 mb-2">Question ${globalIndex + 1}</p>
+                    <p class="text-lg font-semibold text-gray-800 mb-4">${mcq.q}</p>
+                    <div class="space-y-3">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+        };
+
+        const saveAnswer = (mcqId, selectedIndex) => {
+            state.userAnswers[mcqId] = selectedIndex;
+        };
+
+        const changePage = (direction) => {
+            if (!state.currentTest) return;
+            const totalPages = Math.ceil(state.currentTest.mcqs.length / state.mcqsPerPage);
+            let newPage = state.mcqPage + direction;
+
+            if (newPage >= 1 && newPage <= totalPages) {
+                state.mcqPage = newPage;
+                loadMcqPage(state.mcqPage);
+            }
+        };
+
+        const updatePaginationButtons = () => {
+            if (!state.currentTest) return;
+
+            const totalPages = Math.ceil(state.currentTest.mcqs.length / state.mcqsPerPage);
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const submitBtn = document.getElementById('submit-btn');
+
+            prevBtn.disabled = state.mcqPage === 1;
+
+            if (state.mcqPage === totalPages) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        };
+        
+        // --- TIMER LOGIC ---
+
+        const formatTime = (seconds) => {
+            const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const remainingSeconds = String(seconds % 60).padStart(2, '0');
+            return `${minutes}:${remainingSeconds}`;
+        };
+
+        const updateTimerDisplay = () => {
+            const timerEl = document.getElementById('timer');
+            if (timerEl) {
+                timerEl.textContent = formatTime(state.timeLeft);
+                if (state.timeLeft <= 60 && state.timeLeft > 0) { // Last minute warning
+                    timerEl.classList.remove('bg-red-100');
+                    timerEl.classList.add('bg-red-500', 'text-white', 'animate-pulse');
+                } else if (state.timeLeft > 60) {
+                    timerEl.classList.remove('bg-red-500', 'text-white', 'animate-pulse');
+                    timerEl.classList.add('bg-red-100', 'text-red-600');
+                }
+            }
+        };
+
+        const startTimer = () => {
+            if (state.timer) stopTimer(); // Clear any existing timer
+
+            state.timer = setInterval(() => {
+                if (state.timeLeft <= 0) {
+                    stopTimer();
+                    submitTest(true); // Auto-submit on time up
+                } else {
+                    state.timeLeft--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+            updateTimerDisplay(); // Initial display update
+        };
+
+        const stopTimer = () => {
+            if (state.timer) {
+                clearInterval(state.timer);
+                state.timer = null;
+            }
+        };
+
+
+        // --- SUBMISSION & RESULT LOGIC ---
+
+        const confirmSubmitTest = () => {
+            showConfirmationModal("Submit Test", "Are you sure you want to submit your test? You will not be able to change your answers.", () => {
+                closeNotification();
+                submitTest(false);
+            });
+        };
+
+        const confirmStopTest = () => {
+            showConfirmationModal("Stop Test", "Are you sure you want to stop the test? Your current progress will be submitted and the remaining time will be lost.", () => {
+                closeNotification();
+                submitTest(false);
+            });
+        };
+
+        const submitTest = (isTimeUp) => {
+            if (!state.currentTest) return;
+
+            stopTimer();
+
+            let correct = 0;
+            let wrong = 0;
+            let unattempted = 0;
+
+            state.currentTest.mcqs.forEach(mcq => {
+                const selectedAnswer = state.userAnswers[mcq.id];
+                if (selectedAnswer === undefined) {
+                    unattempted++;
+                } else if (selectedAnswer === mcq.ans) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+            
+            const totalQuestions = state.currentTest.mcqs.length;
+            const timeTaken = TEST_DURATION_SECONDS - state.timeLeft;
+
+            state.results = {
+                correct,
+                wrong,
+                unattempted,
+                totalQuestions,
+                timeTaken: formatTime(timeTaken),
+                isTimeUp
+            };
+
+            // Notify user of completion
+            if(isTimeUp) {
+                showNotification("Time Up!", "Your test has been automatically submitted because the time ran out.", "warning");
+            } else {
+                showNotification("Success!", "Your test has been successfully submitted.", "success");
+            }
+            
+            navigate('result-page');
+        };
+
+        const displayResults = () => {
+            if (!state.results || !state.currentTest) return;
+
+            document.getElementById('final-score').textContent = `${state.results.correct}/${state.results.totalQuestions}`;
+            document.getElementById('correct-count').textContent = state.results.correct;
+            document.getElementById('wrong-count').textContent = state.results.wrong;
+            document.getElementById('unattempted-count').textContent = state.results.unattempted;
+            document.getElementById('time-taken').textContent = state.results.timeTaken;
+            
+            // Change color based on performance (simple logic)
+            const scoreBox = document.getElementById('result-score-box');
+            const percentage = (state.results.correct / state.results.totalQuestions) * 100;
+
+            scoreBox.classList.remove('bg-indigo-50', 'border-indigo-200', 'bg-green-50', 'border-green-200', 'bg-red-50', 'border-red-200');
+            
+            if (percentage >= 70) {
+                scoreBox.classList.add('bg-green-50', 'border-green-200');
+            } else if (percentage >= 40) {
+                scoreBox.classList.add('bg-indigo-50', 'border-indigo-200');
+            } else {
+                scoreBox.classList.add('bg-red-50', 'border-red-200');
+            }
+        };
+
+        const displayAnswerReview = () => {
+            if (!state.currentTest) return;
+
+            document.getElementById('review-title').textContent = `Review Answers: ${state.currentTest.title}`;
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+
+            state.currentTest.mcqs.forEach((mcq, index) => {
+                const selectedIndex = state.userAnswers[mcq.id];
+                const isCorrect = selectedIndex === mcq.ans;
+                const isAttempted = selectedIndex !== undefined;
+
+                let cardClass = 'border-l-4 ';
+                let statusText = 'Unattempted';
+                let icon = 'help-circle';
+                let iconClass = 'text-gray-500';
+
+                if (isAttempted) {
+                    if (isCorrect) {
+                        cardClass += 'border-green-500 bg-green-50';
+                        statusText = 'Correct Answer';
+                        icon = 'check-circle';
+                        iconClass = 'text-green-600';
+                    } else {
+                        cardClass += 'border-red-500 bg-red-50';
+                        statusText = 'Wrong Answer';
+                        icon = 'x-circle';
+                        iconClass = 'text-red-600';
+                    }
+                } else {
+                    cardClass += 'border-gray-300 bg-gray-50';
+                    iconClass = 'text-gray-500';
+                }
+
+                const selectedOptionText = isAttempted ? mcq.options[selectedIndex] : 'N/A';
+                const correctOptionText = mcq.options[mcq.ans];
+
+                container.innerHTML += `
+                    <div class="card p-6 ${cardClass}">
+                        <div class="flex items-start justify-between">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Q${index + 1}: ${mcq.q}</h3>
+                            <span class="flex items-center text-sm font-bold p-1 rounded-full ${iconClass}">
+                                <span class="w-5 h-5 mr-1" data-lucide="${icon}"></span>
+                                ${statusText}
+                            </span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <p class="text-gray-700"><strong>Your Selection:</strong> <span class="${isCorrect ? 'text-green-600' : isAttempted ? 'text-red-600' : 'text-gray-500'}">${selectedOptionText}</span></p>
+                            <p class="text-green-600"><strong>Correct Answer:</strong> ${correctOptionText}</p>
+                            <p class="text-gray-500"><strong>All Options:</strong> ${mcq.options.map((opt, i) => `${String.fromCharCode(65 + i)}) ${opt}`).join(' | ')}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            lucide.createIcons();
+        };
+
+
+        // --- GLOBAL NOTIFICATION / MODAL ---
+
+        const notificationBox = document.getElementById('notification-box');
+        const notificationContent = document.getElementById('notification-content');
+        
+        const showNotification = (title, message, type = 'info') => {
+            let icon, titleColor, bgColor;
+            
+            if (type === 'success') {
+                icon = 'check-circle';
+                titleColor = 'text-green-600';
+                bgColor = 'bg-green-100';
+            } else if (type === 'error') {
+                icon = 'alert-triangle';
+                titleColor = 'text-red-600';
+                bgColor = 'bg-red-100';
+            } else if (type === 'warning') {
+                icon = 'alert-circle';
+                titleColor = 'text-yellow-600';
+                bgColor = 'bg-yellow-100';
+            } else { // info
+                icon = 'info';
+                titleColor = 'text-indigo-600';
+                bgColor = 'bg-indigo-100';
+            }
+
+            notificationContent.innerHTML = `
+                <div class="${bgColor} p-4 rounded-full inline-block mb-4">
+                    <span class="w-8 h-8 ${titleColor}" data-lucide="${icon}"></span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 ${titleColor}">${title}</h3>
+                <p class="text-gray-600 mb-6">${message}</p>
+                <button onclick="closeNotification()" class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition">
+                    OK
+                </button>
+            `;
+            notificationBox.classList.remove('hidden');
+            lucide.createIcons();
+        };
+
+        const showConfirmationModal = (title, message, onConfirm) => {
+            notificationContent.innerHTML = `
+                <div class="bg-yellow-100 p-4 rounded-full inline-block mb-4">
+                    <span class="w-8 h-8 text-yellow-600" data-lucide="alert-triangle"></span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">${title}</h3>
+                <p class="text-gray-600 mb-6">${message}</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="closeNotification()" class="px-6 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition">
+                        Cancel
+                    </button>
+                    <button onclick="${onConfirm.name}()" class="px-6 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition">
+                        Confirm ${title.split(' ')[0]}
+                    </button>
+                </div>
+            `;
+            notificationBox.classList.remove('hidden');
+            lucide.createIcons();
+        };
+        
+        const closeNotification = () => {
+            notificationBox.classList.add('hidden');
+        };
+
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('home-page'); // Start at the login screen
+        });
+    </script>
+</body>
+</html>
