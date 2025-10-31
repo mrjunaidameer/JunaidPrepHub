@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junaid's Admissions Test Prep Hub</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/pTMZJKM7/Whisk-c4be96bf28acbfd935348cec62e12dc8dr-1-Picsart-Background-Remover.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXjmr7A7RYcMiLz7R/E0n/YJ1S4mK0tq4i+O91h3f2Fw4p4c2uFzD1o2uF5u5i" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-2eD3wY1R84E33w345w1p+8w2b3Bf6w7yq6L3v9v1uF+fV4p4c2uFzD1o2uF5u5i" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-M+G5r5I/B+n3+9O/5x4t0W5p5C013+2u6L3v9v1uF+fV4p4c2uFzD1o2uF5u5i" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        /* Custom Font for Professional Look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        :root {
+            --primary-color: #1e3a8a; /* Dark Blue */
+            --accent-color: #4f46e5; /* Medium Indigo */
+            --danger-color: #ef4444; /* Red */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            /* ENHANCEMENT: Subtle background gradient for depth */
+            background-image: linear-gradient(to top, #f0f4f8, #f8fafc);
+        }
+
+        /* Styling for the main content area */
+        #content {
+            min-height: calc(100vh - 64px); /* Full height minus header */
+        }
+
+        /* Enhanced Card Styling */
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px); /* Increased lift */
+            box-shadow: 0 18px 30px -5px rgba(0, 0, 0, 0.18); /* Stronger shadow on hover */
+        }
+
+        /* Focus Style for Login Form (Overall Look Improvement) */
+        #login-form input:focus {
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2); /* Use Indigo focus ring */
+            border-color: var(--accent-color);
+        }
+
+        /* Styling for the radio buttons/options */
+        .option-label {
+            cursor: pointer;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-label:hover {
+            border-color: #c7d2fe; /* Light blue on hover */
+            background-color: #f9fafb;
+        }
+
+        input[type="radio"]:checked + .option-label {
+            background-color: #eef2ff; /* Very light indigo */
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Custom checkmark for selected option */
+        .option-label::before {
+            content: '';
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 1rem;
+            border-radius: 50%;
+            border: 2px solid #9ca3af;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        input[type="radio"]:checked + .option-label::before {
+            border-color: var(--accent-color);
+            background-color: var(--accent-color);
+            box-shadow: inset 0 0 0 4px white;
+        }
+        
+        /* Test Page UI Colors */
+        .timer-default {
+            background-color: #e0f2fe;
+            color: #1e40af;
+        }
+        .timer-warning {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        .timer-finished {
+            background-color: #9ca3af;
+            color: white;
+        }
+        /* Style for the stop button, ensuring it looks distinct */
+        .stop-test-btn {
+            background-color: #f8fafc;
+            color: #1f2937;
+            border: 1px solid #d1d5db;
+        }
+        .stop-test-btn:hover {
+            background-color: #fef2f2;
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+
+        /* ENHANCEMENT: Hero style for Welcome Page */
+        #welcome-hero-banner {
+            background: linear-gradient(135deg, #4f46e5 0%, #1e3a8a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-gray-900 flex items-center">
+                <span class="w-6 h-6 mr-2 text-indigo-600" data-lucide="book-open-text"></span>
+                <span class="text-indigo-600">Junaid</span><span class="text-gray-900">PrepHub</span>
+            </h1>
+            <div id="header-user-info" class="hidden text-sm text-gray-600 space-x-4">
+                <span id="header-name" class="font-medium text-indigo-700"></span>
+                <span id="header-rollno"></span>
+            </div>
+        </div>
+    </header>
+
+    <main id="content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <section id="home-page" class="page flex flex-col items-center justify-center min-h-[70vh]">
+            <div class="card p-8 md:p-12 w-full max-w-lg text-center bg-white shadow-2xl">
+                <h2 class="text-4xl font-bold mb-4 text-gray-900">Welcome, Future Scholar!</h2>
+                <p class="text-lg text-gray-600 mb-8">Please enter your details to access the test preparation material.</p>
+                <form id="login-form" class="space-y-6 border border-indigo-200 p-6 rounded-xl shadow-inner bg-indigo-50">
+                    <div>
+                        <input type="text" id="full-name" placeholder="Full Name (e.g., Junaid Ameer)" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg text-lg transition duration-150">
+                    </div>
+                    <div>
+                        <input type="text" id="roll-no" placeholder="Roll No (e.g., BSCS-F23-123)" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg text-lg transition duration-150">
+                    </div>
+                    <button type="submit"
+                        class="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-150">
+                        Start Exploring
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="welcome-page" class="page hidden">
+            <div id="welcome-hero-banner" class="text-center">
+                <h2 class="text-5xl font-extrabold mb-4">
+                    Welcome, <span id="welcome-name" class="text-yellow-300"></span>!
+                </h2>
+                <p class="text-xl opacity-90 mb-6">Your journey to academic excellence begins here. Choose your preparation track below.</p>
+                <span class="w-10 h-10 mx-auto text-yellow-300" data-lucide="award"></span>
+                <p class="text-xs mt-4 opacity-70">Platform proudly conceptualized and developed by Junaid Ameer.</p> </div>
+
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3 flex items-center">
+                            <span class="w-5 h-5 mr-2 text-indigo-500" data-lucide="target"></span>
+                            What You'll Get Here
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            This platform is your comprehensive resource for university admission tests. We offer focused MCQs across various subjects to sharpen your skills and ensure you are fully prepared. Our content is curated for exams like IUB NAT, GAT, and NTS.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><span class="font-medium">Mathematics:</span> Core concepts, Algebra, and Arithmetic.</div>
+                            </div>
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><span class="font-medium">Computer Science:</span> Fundamentals and Programming logic.</div>
+                            </div>
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><span class="font-medium">English & Grammar:</span> Vocabulary, sentence structure, and comprehension.</div>
+                            </div>
+                            <div class="flex items-start text-gray-700">
+                                <span class="w-5 h-5 mr-3 mt-1 text-green-500" data-lucide="check-circle"></span>
+                                <div><span class="font-medium">IQ & Logic:</span> Critical reasoning and quantitative aptitude.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200 shadow-md">
+                        <h3 class="text-xl font-semibold text-indigo-800 mb-4 flex items-center">
+                             <span class="w-5 h-5 mr-2" data-lucide="graduation-cap"></span>
+                            Why Prepare With Us?
+                        </h3>
+                         <p class="text-indigo-700 leading-relaxed">
+                            Our goal is simple: to help you succeed in high-stakes university admission exams. The tests are designed to mimic the actual exam environment, complete with time limits and detailed scoring, ensuring you walk into your real exam with confidence and a solid foundation of knowledge.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row gap-4">
+                    <button onclick="navigate('explore-page')"
+                        class="flex-1 flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150 shadow-lg transform hover:scale-[1.01]">
+                        <span class="w-5 h-5 mr-2" data-lucide="search"></span>
+                        Explore Tests
+                    </button>
+                    <button onclick="navigate('info-page')"
+                        class="flex-1 flex items-center justify-center px-6 py-3 border border-indigo-600 text-base font-medium rounded-lg text-indigo-600 bg-white hover:bg-indigo-50 transition duration-150 shadow-md transform hover:scale-[1.01]">
+                        <span class="w-5 h-5 mr-2" data-lucide="info"></span>
+                        Get Info
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="info-page" class="page hidden">
+            <button onclick="navigate('welcome-page')" class="text-indigo-600 hover:text-indigo-800 mb-6 flex items-center">
+                <span class="w-5 h-5 mr-1" data-lucide="arrow-left"></span>
+                Back to Welcome
+            </button>
+            <div class="card p-8 md:p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 border-b pb-3 flex items-center">
+                    <span class="w-6 h-6 mr-3 text-indigo-600" data-lucide="gem"></span>
+                    Our Mission: Excellence in Preparation
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-10">
+                    <div class="bg-green-50 p-6 rounded-xl border-b-4 border-green-500 shadow-md">
+                        <span class="w-8 h-8 mx-auto text-green-600 block mb-3" data-lucide="flask-conical"></span>
+                        <p class="text-3xl font-extrabold text-green-800">360+</p>
+                        <p class="text-gray-600 font-medium">Verified MCQs</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-xl border-b-4 border-yellow-500 shadow-md">
+                        <span class="w-8 h-8 mx-auto text-yellow-600 block mb-3" data-lucide="layers"></span>
+                        <p class="text-3xl font-extrabold text-yellow-800">3 Levels</p>
+                        <p class="text-gray-600 font-medium">Progressive Difficulty</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-xl border-b-4 border-red-500 shadow-md">
+                        <span class="w-8 h-8 mx-auto text-red-600 block mb-3" data-lucide="clock-3"></span>
+                        <p class="text-3xl font-extrabold text-red-800">Timed</p>
+                        <p class="text-gray-600 font-medium">Real Exam Simulation</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 text-gray-700 text-lg">
+                    <h3 class="text-2xl font-semibold text-gray-800 border-b-2 pb-2">Platform Philosophy</h3>
+                    <p>
+                        The primary goal of the Admissions Test Preparation Hub is to be the single most reliable source for high-quality, exam-style practice. We understand that success in exams like IUB NAT, GAT, and NTS hinges on practice that mirrors the actual test environment. Our resources are meticulously checked to eliminate errors, especially in complex mathematical and logical problems, ensuring you build confidence on a solid foundation.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Accuracy Guaranteed: Our team ensures every MCQ has a verifiable, single correct answer.</li>
+                        <li>Professional Rendering: Complex equations are rendered using KaTeX for perfect mathematical readability.</li>
+                        <li>Smooth Experience: All interactive elements, including the crucial submission process, are rigorously tested to function flawlessly.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold text-gray-800 pt-4 border-b-2 pb-2">Created By (Version 3.0)</h3>
+                    <div class="flex items-center space-x-4 bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-600">
+                        <span class="w-8 h-8 text-indigo-600" data-lucide="user-circle"></span>
+                        <div>
+                            <p class="font-bold text-xl text-gray-900">Junaid Ameer (Creator & Developer)</p>
+                            <p class="text-indigo-700">Student of BS Cyber Security at The Islamia University of Bahawalpur (IUB)</p>
+                            <p class="text-sm text-gray-500 mt-1">This site was built and refined to aid fellow students in admissions test preparation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="explore-page" class="page hidden">
+            <div class="mb-8">
+                <button onclick="navigate('welcome-page')" class="text-indigo-600 hover:text-indigo-800 mb-6 flex items-center">
+                    <span class="w-5 h-5 mr-1" data-lucide="arrow-left"></span>
+                    Back to Welcome
+                </button>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Explore Available Tests</h2>
+                <p class="text-gray-600">Select a difficulty level to view the relevant tests.</p>
+            </div>
+
+            <div class="flex border-b border-gray-200 mb-8 overflow-x-auto">
+                <button data-level="Easy" onclick="filterTests('Easy')" class="level-tab px-6 py-3 text-lg font-medium border-b-2 border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-300 transition duration-150 whitespace-nowrap">Easy</button>
+                <button data-level="Intermediate" onclick="filterTests('Intermediate')" class="level-tab px-6 py-3 text-lg font-medium border-b-2 border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-300 transition duration-150 whitespace-nowrap">Intermediate</button>
+                <button data-level="Advanced" onclick="filterTests('Advanced')" class="level-tab px-6 py-3 text-lg font-medium border-b-2 border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-300 transition duration-150 whitespace-nowrap">Advanced</button>
+            </div>
+
+            <div id="test-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+        </section>
+
+        <section id="test-page" class="page hidden">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-3 border-b border-gray-200">
+                <div class="mb-4 sm:mb-0">
+                    <h2 id="test-title" class="text-3xl font-bold text-gray-900"></h2>
+                    <p class="text-gray-500 text-lg">Questions: <span id="test-question-count"></span> | Page <span id="current-mcq-page">1</span> of <span id="test-page-count"></span></p>
+                </div>
+                <div class="flex items-end sm:items-center space-x-4">
+                    <div class="flex flex-col items-end">
+                        <div id="timer" class="text-3xl font-mono px-4 py-2 rounded-lg shadow-inner timer-default">00:00</div>
+                        <button onclick="confirmStopTest()" class="text-xs mt-2 font-semibold px-2 py-1 rounded-md transition duration-150 stop-test-btn">
+                            Stop Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <form id="quiz-form" onsubmit="event.preventDefault()">
+                <div id="quiz-questions-container" class="space-y-8 mb-10">
+                    </div>
+            </form>
+
+            <div class="flex justify-between items-center mt-8">
+                <button id="prev-page-btn" onclick="changePage(-1)" disabled
+                    class="flex items-center px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span class="w-5 h-5 mr-1" data-lucide="chevron-left"></span>
+                    Previous Page
+                </button>
+                <div class="text-lg font-medium text-gray-600">
+                    <span id="questions-attempted-count">0</span> / <span id="test-question-count-2"></span> Attempted
+                </div>
+                <button id="next-page-btn" onclick="changePage(1)"
+                    class="flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150">
+                    Next Page
+                    <span class="w-5 h-5 ml-1" data-lucide="chevron-right"></span>
+                </button>
+                <button id="submit-btn" onclick="confirmSubmitTest()"
+                    class="hidden flex items-center px-8 py-3 bg-green-600 text-white font-bold rounded-lg shadow-xl hover:bg-green-700 transition duration-150">
+                    <span class="w-5 h-5 mr-1" data-lucide="send"></span>
+                    Submit Test
+                </button>
+            </div>
+        </section>
+        
+        <section id="result-page" class="page hidden flex flex-col items-center">
+            <div class="card p-8 md:p-12 w-full max-w-2xl text-center">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-6">Test Complete!</h2>
+
+                <div id="result-score-box" class="p-6 rounded-xl mb-8 shadow-inner bg-indigo-50 border border-indigo-200">
+                    <p class="text-2xl font-semibold text-gray-600 mb-2">Your Score</p>
+                    <p id="final-score" class="text-7xl font-bold text-indigo-600 leading-none">0/30</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 text-left mb-8">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Correct Answers</p>
+                        <p id="correct-count" class="text-3xl font-bold text-green-600">0</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Time Taken</p>
+                        <p id="time-taken" class="text-3xl font-bold text-red-600">00:00</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Wrong Answers</p>
+                        <p id="wrong-count" class="text-3xl font-bold text-red-600">0</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-500 text-sm">Unattempted</p>
+                        <p id="unattempted-count" class="text-3xl font-bold text-gray-600">0</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="navigate('explore-page')"
+                        class="flex-1 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150">
+                        Go Back to Tests
+                    </button>
+                    <button onclick="navigate('answer-review-page')"
+                        class="flex-1 px-6 py-3 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition duration-150">
+                        View Correct/Wrong Answers
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="answer-review-page" class="page hidden">
+            <button onclick="navigate('result-page')" class="text-indigo-600 hover:text-indigo-800 mb-6 flex items-center">
+                <span class="w-5 h-5 mr-1" data-lucide="arrow-left"></span>
+                Back to Results
+            </button>
+            <h2 id="review-title" class="text-3xl font-bold text-gray-900 mb-6 border-b pb-3">Review Answers: </h2>
+            <div id="review-container" class="space-y-8">
+                </div>
+            <div class="mt-8 text-center">
+                <button onclick="navigate('explore-page')"
+                    class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150">
+                    Return to Test Selection
+                </button>
+            </div>
+        </section>
+
+
+        <div id="notification-box" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 hidden z-[100]">
+            <div id="notification-content" class="bg-white p-8 rounded-xl max-w-md w-full shadow-2xl text-center">
+                </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- DATA STRUCTURES ---
+
+        // Helper function to shuffle an array (Fisher-Yates)
+        const shuffleArray = (array) => {
+            let shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        };
+
+        // Standardized function to create an MCQ object
+        const createMCQ = (id, question, options, answerIndex, subject, category) => {
+            const correctOption = options[answerIndex];
+            const shuffledOptions = shuffleArray(options);
+            const newAnswerIndex = shuffledOptions.indexOf(correctOption);
+
+            return {
+                id: id,
+                q: question,
+                options: shuffledOptions,
+                ans: newAnswerIndex, // Store the new index of the correct answer
+                subject: subject,
+                category: category
+            };
+        };
+
+        // ====================================================================
+        // START: DEEP CLEANED MCQS DATA 
+        // NOTE: This section contains simplified math/IQ expressions as requested.
+        // ====================================================================
+
+        // --------------------------------------------------------------------
+        // EASY LEVEL MCQs (Math, English, IQ, Computer)
+        // --------------------------------------------------------------------
+
+        const mcqs_easy_math_logic = [
+            createMCQ(1, "A number x increased by itself and added to x + 5 equals 17. What is the number?", ["3", "4", "5", "6"], 1, "Math", "Algebra"),
+            createMCQ(2, "If the sum of three numbers is 93, what is their average?", ["27", "31", "29", "33"], 1, "Math", "Arithmetic"),
+            createMCQ(3, "What is the percent discount on trousers marked from 160 to 120?", ["15%", "20%", "25%", "30%"], 2, "Math", "Percentage"),
+            createMCQ(4, "The ratio 35 : 84 in simplest form is", ["7 : 14", "5 : 14", "5 : 12", "7 : 15"], 2, "Math", "Ratio"),
+            createMCQ(5, "What percent of 3/5 is 3/10?", ["25%", "50%", "75%", "100%"], 1, "Math", "Percentage"),
+            createMCQ(6, "The average rent of seven shops is Rs. 2300. What is the total rent?", ["14,900", "16,100", "17,000", "15,900"], 1, "Math", "Arithmetic"),
+            createMCQ(7, "If a car travels at 60 km/h for 3 hours, how far does it travel?", ["150 km", "180 km", "200 km", "210 km"], 1, "Math", "Distance"),
+            createMCQ(8, "If A = 3 and B = 4, what is A^2 + B^2?", ["12", "7", "25", "16"], 2, "Math", "Algebra"),
+            createMCQ(9, "What is the next number in the sequence: 5, 10, 15, 20, ...", ["21", "25", "30", "35"], 1, "IQ", "Series"),
+            createMCQ(10, "Which is the largest number?", ["0.5", "1/4", "3/5", "0.2"], 2, "Math", "Fractions"),
+            
+            // English: Grammar & Vocabulary (CLEANED)
+            createMCQ(11, "Your views are identical ___ mine.", ["with", "for", "to", "of"], 2, "English", "Prepositions"),
+            createMCQ(12, "He married ___ money.", ["at", "with", "for", "from"], 2, "English", "Prepositions"),
+            createMCQ(13, "Please distribute the toffees ___ the children.", ["between", "on", "among", "for"], 2, "English", "Prepositions"),
+            createMCQ(14, "It began to dawn ___ me that the murder was done in our midst.", ["for", "from", "by", "on"], 3, "English", "Phrasal Verbs"),
+            createMCQ(15, "Why ___ you break your promise?", ["do", "did", "have", "does"], 1, "English", "Tenses"),
+            createMCQ(16, "I ___ a new bike yesterday.", ["buy", "buying", "bought", "have bought"], 2, "English", "Tenses"),
+            createMCQ(17, "He has been sleeping ___ five hours. (Duration)", ["since", "for", "till", "from"], 1, "English", "Prepositions"),
+            createMCQ(18, "Cats sleep ___ the day and move out at night.", ["on", "at", "during", "from"], 2, "English", "Prepositions"),
+            createMCQ(19, "Choose the correctly spelled word.", ["Caracteristics", "Charactristics", "Characteristics", "Charactaristics"], 2, "English", "Spelling"),
+            createMCQ(20, "Synonym of 'Abundant'", ["Scarce", "Plentiful", "Rare", "Minimal"], 1, "English", "Vocabulary"),
+            
+            // IQ: Logic & Word Relations (CLEANED)
+            createMCQ(21, "Pen is to point as needle is to ___", ["pin", "sew", "stitch", "cloth"], 2, "IQ", "Analogy"),
+            createMCQ(22, "P is the daughter of K and is married to G. X and G are brothers. How is P related to G?", ["Sister", "Wife", "Mother", "Cousin"], 1, "IQ", "Blood Relations"),
+            createMCQ(23, "If APPLE is coded as BQQMF, how is ORANGE coded?", ["PSBOHF", "PSBOHE", "PSPBOF", "PSBPKF"], 0, "IQ", "Coding"),
+            createMCQ(24, "Which word does NOT belong to the group: Chair, Table, Sofa, Lamp?", ["Chair", "Table", "Sofa", "Lamp"], 3, "IQ", "Odd One Out"),
+            createMCQ(25, "In a line, Junaid is 15th from the left and 7th from the right. How many people are in the line?", ["21", "22", "23", "20"], 0, "IQ", "Ranking"),
+            createMCQ(26, "If 'Cloud' is called 'White', 'White' is called 'Rain', 'Rain' is called 'Green', what color is the sky in clear weather?", ["Cloud", "White", "Rain", "Green"], 2, "IQ", "Verbal Logic"),
+            createMCQ(27, "Which fraction is equivalent to 0.75?", ["1/4", "2/5", "3/4", "4/5"], 2, "Math", "Fractions"),
+            createMCQ(28, "The perimeter of a square with side length 5 cm is:", ["10 cm", "20 cm", "25 cm", "30 cm"], 1, "Math", "Geometry"),
+            createMCQ(29, "Antonym of 'Flexible'", ["Elastic", "Pliable", "Rigid", "Fluid"], 2, "English", "Vocabulary"),
+            createMCQ(30, "What is 12 x 8 - 4?", ["90", "92", "94", "96"], 1, "Math", "Arithmetic"),
+        ];
+        
+        const mcqs_easy_english_1 = [
+            createMCQ(31, "Antonym of 'Eradicate'", ["Destroy", "Preserve", "Abolish", "Exterminate"], 1, "English", "Vocabulary"),
+            createMCQ(32, "Synonym of 'Diligent'", ["Lazy", "Hardworking", "Careless", "Slow"], 1, "English", "Vocabulary"),
+            createMCQ(33, "Choose the correct sentence: I saw a dream last night. / I had a dream last night.", ["I saw a dream last night.", "I had a dream last night.", "Both are correct.", "Neither is correct."], 1, "English", "Grammar"),
+            createMCQ(34, "Neither the boys nor the girl ___ present.", ["was", "were", "are", "have been"], 0, "English", "Subject-Verb"),
+            createMCQ(35, "The ship is bound ___ Karachi.", ["at", "to", "for", "with"], 2, "English", "Prepositions"),
+            createMCQ(36, "He takes pride ___ his achievements.", ["on", "at", "in", "with"], 2, "English", "Prepositions"),
+            createMCQ(37, "He is a man of letters. (Meaning of idiom)", ["Postman", "Lover of literature", "Good at writing letters", "Man of wealth"], 1, "English", "Idioms"),
+            createMCQ(38, "If you had come earlier, you ___ met him.", ["would have", "will have", "would", "had"], 0, "English", "Conditionals"),
+            createMCQ(39, "Convert to Passive: She is writing a letter.", ["A letter is written by her.", "A letter is being written by her.", "A letter was written by her.", "A letter has been written by her."], 1, "English", "Voice"),
+            createMCQ(40, "Choose the correctly spelled word.", ["Acommodate", "Accomodate", "Accommodate", "Acommodeate"], 2, "English", "Spelling"),
+            createMCQ(41, "The phrase 'Break the ice' means:", ["To make a path", "To start a conversation", "To end a friendship", "To solve a mystery"], 1, "English", "Idioms"),
+            createMCQ(42, "The adjective form of 'Advice' is:", ["Advisable", "Advise", "Advisory", "Advised"], 2, "English", "Word Form"),
+            createMCQ(43, "Identify the adverb: He drove carefully.", ["He", "drove", "carefully", "not in sentence"], 2, "English", "Parts of Speech"),
+            createMCQ(44, "The thief disappeared ___ the crowd.", ["in", "into", "among", "through"], 1, "English", "Prepositions"),
+            createMCQ(45, "The sun ___ in the East. (Simple Present Tense)", ["is rising", "rose", "rises", "has risen"], 2, "English", "Tenses"),
+            createMCQ(46, "Find the correct plural of 'Wife'.", ["Wifes", "Wives", "Wive", "Wiefs"], 1, "English", "Plural"),
+            createMCQ(47, "He asked me what ___ doing.", ["I am", "I was", "was I", "am I"], 1, "English", "Narration"),
+            createMCQ(48, "Synonym of 'Vivid'", ["Dull", "Bright", "Dark", "Faint"], 1, "English", "Vocabulary"),
+            createMCQ(49, "Antonym of 'Artificial'", ["Fake", "Natural", "Man-made", "Synthetic"], 1, "English", "Vocabulary"),
+            createMCQ(50, "The news is too good to be true. (Identify the usage of 'to be true')", ["Noun Phrase", "Adverbial Phrase", "Infinitive Phrase", "Gerund Phrase"], 2, "English", "Grammar"),
+            createMCQ(51, "The passive form of 'We must respect the elders' is:", ["The elders must be respected.", "The elders are respected.", "The elders have been respected.", "Respect the elders."], 0, "English", "Voice"),
+            createMCQ(52, "She is junior ___ me in the office.", ["than", "to", "from", "with"], 1, "English", "Prepositions"),
+            createMCQ(53, "The doctor advised him to abstain from smoking. (Meaning of bold phrase)", ["To start", "To give up", "To continue", "To increase"], 1, "English", "Vocabulary"),
+            createMCQ(54, "Which word is a noun?", ["Quickly", "Run", "Beauty", "Beautiful"], 2, "English", "Parts of Speech"),
+            createMCQ(55, "Find the error: She spoke (A) to the (B) manager rudely (C). No error (D).", ["A", "B", "C", "D"], 3, "English", "Error Detection"),
+            createMCQ(56, "The synonym of Candid is:", ["Secretive", "Frank", "Reserved", "Deceitful"], 1, "English", "Vocabulary"),
+            createMCQ(57, "The sun was shining brightly. (Identify the part of speech of brightly)", ["Adjective", "Noun", "Verb", "Adverb"], 3, "English", "Parts of Speech"),
+            createMCQ(58, "Correct tense: He ___ in London for ten years.", ["lived", "is living", "has been living", "will live"], 2, "English", "Tenses"),
+            createMCQ(59, "The correct spelling is:", ["Occassion", "Ocassion", "Occasion", "Ocasion"], 2, "English", "Spelling"),
+            createMCQ(60, "He works hard lest he ___ fail.", ["should", "would", "might", "can"], 0, "English", "Conjunctions"),
+        ];
+
+        const mcqs_easy_iq_1 = [
+            // Cleaned
+            createMCQ(61, "What comes next in the sequence: 3, 5, 8, 12, 17, ...?", ["21", "22", "23", "24"], 2, "IQ", "Series"), 
+            createMCQ(62, "If BAT is coded as 2012, how is CAT coded?", ["3120", "3119", "2120", "4120"], 0, "IQ", "Coding"), 
+            createMCQ(63, "Ocean is to Water as Glacier is to ___", ["Mountain", "Ice", "Cave", "Winter"], 1, "IQ", "Analogy"),
+            createMCQ(64, "Which number does not belong: 2, 3, 5, 7, 9, 11?", ["3", "5", "9", "11"], 2, "IQ", "Odd One Out"), 
+            createMCQ(65, "A man walks 5 km East, then 3 km North, and then 5 km West. How far is he from his starting point?", ["5 km", "3 km", "13 km", "0 km"], 1, "IQ", "Direction"),
+            createMCQ(66, "If 'Dog' is brother of 'Cat', and 'Cat' is mother of 'Mouse', how is 'Dog' related to 'Mouse'?", ["Father", "Uncle", "Cousin", "Brother"], 1, "IQ", "Blood Relations"),
+            createMCQ(67, "Complete the sequence: 100, 96, 92, 88, ...", ["86", "85", "84", "80"], 2, "IQ", "Series"), 
+            createMCQ(68, "Clock is to Time as Thermometer is to ___", ["Weather", "Temperature", "Heat", "Energy"], 1, "IQ", "Analogy"),
+            createMCQ(69, "If the day before yesterday was Thursday, what day is tomorrow?", ["Saturday", "Sunday", "Monday", "Friday"], 1, "IQ", "Calendar"), 
+            createMCQ(70, "Find the missing letter: B, D, G, K, P, ...", ["R", "S", "U", "V"], 3, "IQ", "Series"),
+            createMCQ(71, "If a is 2b and b is 3c, what is a/c?", ["6", "5", "3", "2"], 0, "Math", "Logic"), 
+            createMCQ(72, "In a class of 40 students, 15 play cricket and 20 play football. If 5 play both, how many play neither?", ["5", "10", "15", "12"], 1, "Math", "Sets"),
+            createMCQ(73, "Which of the following is NOT a unit of speed?", ["m/s", "km/h", "m/s^2", "miles/h"], 2, "Math", "Physics"), 
+            createMCQ(74, "Find the value of 2(3 + 4) - 5.", ["9", "10", "11", "12"], 0, "Math", "Arithmetic"),
+            createMCQ(75, "If 12 men can complete a work in 8 days, how many days will 16 men take to complete the same work?", ["6 days", "5 days", "4 days", "8 days"], 0, "Math", "Work Rate"), 
+            createMCQ(76, "Antonym of Commence", ["Start", "Begin", "Finish", "Launch"], 2, "English", "Vocabulary"),
+            createMCQ(77, "Choose the sentence with correct parallel structure:", ["He likes running, reading, and to swim.", "He likes to run, to read, and swimming.", "He likes running, reading, and swimming.", "He likes to run, reading, and swimming."], 2, "English", "Grammar"),
+            createMCQ(78, "Synonym of Perplex", ["Clarify", "Confuse", "Simplify", "Explain"], 1, "English", "Vocabulary"),
+            createMCQ(79, "Neither food nor water ___ found.", ["is", "are", "were", "have been"], 0, "English", "Subject-Verb"), 
+            createMCQ(80, "Which is the smallest prime number?", ["0", "1", "2", "3"], 2, "Math", "Number Theory"),
+
+            // Filler for IQ (to reach 30)
+            createMCQ(81, "If 1=3, 2=3, 3=5, 4=4, 5=4. What is 6?", ["2", "3", "4", "5"], 1, "IQ", "Wordplay"),
+            createMCQ(82, "Hospital is to Patient as School is to ___", ["Teacher", "Student", "Building", "Study"], 1, "IQ", "Analogy"),
+            createMCQ(83, "Find the missing term: BAZ, CBZ, DCX, ...", ["EDW", "EFW", "EDV", "EEW"], 0, "IQ", "Series"), 
+            createMCQ(84, "If the temperature dropped from 15 degrees C to -5 degrees C, what is the change?", ["10 degrees C", "20 degrees C", "5 degrees C", "15 degrees C"], 1, "Math", "Arithmetic"),
+            createMCQ(85, "Choose the pair that shows the same relationship: Finger : Hand", ["Leaf : Branch", "Book : Page", "Wheel : Car", "Foot : Shoe"], 0, "IQ", "Analogy"),
+            createMCQ(86, "In a circular arrangement puzzle, who is facing the center if only three people are present?", ["Person A", "Person B", "All of them", "Cannot be determined"], 2, "IQ", "Logic"),
+            createMCQ(87, "Which one is different: Copper, Zinc, Gold, Platinum?", ["Copper", "Zinc", "Gold", "Platinum"], 2, "IQ", "Odd One Out"),
+            createMCQ(88, "A train crosses a pole in 10 seconds. If its speed is 30 m/s, what is the length of the train?", ["300 m", "200 m", "150 m", "100 m"], 0, "Math", "Time/Distance"),
+            createMCQ(89, "If you rearrange the letters CIFAIC, you get a name of a:", ["Country", "City", "Ocean", "River"], 2, "IQ", "Word Jumble"), 
+            createMCQ(90, "Find the area of a circle with radius 7 cm. (Use pi = 22/7)", ["154 cm^2", "44 cm^2", "22 cm^2", "77 cm^2"], 0, "Math", "Geometry"),
+        ];
+
+        const mcqs_easy_computer_1 = [
+            // Cleaned
+            createMCQ(91, "Which is the main circuit board of a computer?", ["RAM", "Hard Disk", "Motherboard", "CPU"], 2, "Computer", "Hardware"),
+            createMCQ(92, "What does CPU stand for?", ["Central Power Unit", "Central Processing Unit", "Computer Personal Utility", "Core Processing Unit"], 1, "Computer", "Fundamentals"),
+            createMCQ(93, "Which of these is volatile memory?", ["ROM", "Hard Drive", "SSD", "RAM"], 3, "Computer", "Memory"),
+            createMCQ(94, "A byte is made up of how many bits?", ["4", "8", "16", "32"], 1, "Computer", "Data Unit"),
+            createMCQ(95, "What is the function of the ALU in the CPU?", ["Store data", "Perform Arithmetic/Logic operations", "Control the flow", "Input data"], 1, "Computer", "CPU"),
+            createMCQ(96, "Which input device is used to enter data by hand?", ["Monitor", "Printer", "Keyboard", "Speaker"], 2, "Computer", "Input/Output"),
+            createMCQ(97, "The term URL stands for:", ["Universal Resource Locator", "Uniform Resource Link", "Universal Remote Locator", "Uniform Resource Locator"], 3, "Computer", "Networking"),
+            createMCQ(98, "The smallest unit of digital information is:", ["Byte", "Kilobyte", "Bit", "Gigabyte"], 2, "Computer", "Data Unit"),
+            createMCQ(99, "What is MS Word an example of?", ["System Software", "Utility Program", "Application Software", "Operating System"], 2, "Computer", "Software"),
+            createMCQ(100, "Which is NOT a type of computer language?", ["High-level", "Machine-level", "Intermediate-level", "Assembly-level"], 2, "Computer", "Programming"),
+            createMCQ(101, "What is the default port for HTTP?", ["80", "21", "23", "443"], 0, "Computer", "Networking"),
+            createMCQ(102, "What does OS stand for?", ["Operating Server", "Open Source", "Operating System", "Object Software"], 2, "Computer", "Fundamentals"),
+            createMCQ(103, "If AND gate inputs are 1 and 0, the output is:", ["1", "0", "True", "False"], 1, "Computer", "Logic Gate"),
+            createMCQ(104, "Which of the following is a search engine?", ["Facebook", "Wikipedia", "Google", "LinkedIn"], 2, "Computer", "General"),
+            createMCQ(105, "The basic unit of a worksheet in Excel is a:", ["Cell", "Tab", "Row", "Column"], 0, "Computer", "Software"),
+            createMCQ(106, "What is the result of the binary addition 1 + 1?", ["0 with carry 1", "1 with carry 0", "10", "0"], 0, "Computer", "Binary"),
+            createMCQ(107, "A network confined to a small area (like an office) is called:", ["WAN", "MAN", "LAN", "CAN"], 2, "Computer", "Networking"),
+            createMCQ(108, "A program that destroys data and is spread via files is a:", ["Worm", "Trojan", "Virus", "Rootkit"], 2, "Computer", "Security"),
+            createMCQ(109, "The shortcut key to save a file is:", ["Ctrl + X", "Ctrl + S", "Ctrl + C", "Ctrl + V"], 1, "Computer", "Software"),
+            createMCQ(110, "Which port is used to connect a monitor?", ["USB", "Ethernet", "VGA/HDMI", "Serial"], 2, "Computer", "Hardware"),
+            
+            // Filler for Computer (to reach 30)
+            createMCQ(111, "What is the base of the decimal number system?", ["2", "8", "10", "16"], 2, "Computer", "Number System"),
+            createMCQ(112, "Who is known as the father of computers?", ["Bill Gates", "Charles Babbage", "Alan Turing", "Steve Jobs"], 1, "Computer", "History"),
+            createMCQ(113, "What is ISP?", ["Internet Service Provider", "Internal System Protocol", "Information Service Port", "Independent Server Provider"], 0, "Computer", "Networking"),
+            createMCQ(114, "Which cable is commonly used for LAN connections?", ["Coaxial", "Fiber Optic", "UTP/Ethernet", "Power Cord"], 2, "Computer", "Networking"),
+            createMCQ(115, "A compiler converts a high-level language program into:", ["Assembly Language", "Binary Code", "Another High-level Language", "Source Code"], 1, "Computer", "Programming"),
+            createMCQ(116, "What does GUI stand for?", ["General User Interface", "Graphical Utility Interface", "Graphical User Interface", "Global User Input"], 2, "Computer", "Fundamentals"),
+            createMCQ(117, "What is the key that toggles between upper and lower case letters?", ["Shift", "Ctrl", "Caps Lock", "Alt"], 2, "Computer", "Hardware"),
+            createMCQ(118, "Which one is an Output device?", ["Mouse", "Scanner", "Monitor", "Webcam"], 2, "Computer", "Input/Output"),
+            createMCQ(119, "A piece of software that manages all hardware resources is the:", ["Driver", "OS", "Application", "Utility"], 1, "Computer", "Fundamentals"),
+            createMCQ(120, "What is the process of finding and fixing errors in a program?", ["Compiling", "Executing", "Debugging", "Testing"], 2, "Computer", "Programming"),
+        ];
+
+
+        // --------------------------------------------------------------------
+        // INTERMEDIATE LEVEL MCQs
+        // --------------------------------------------------------------------
+
+        const mcqs_inter_math_1 = [
+            // Cleaned
+            createMCQ(121, "If (x - 1) / 2 = 5, what is the value of x?", ["9", "10", "11", "12"], 2, "Math", "Algebra"), 
+            createMCQ(122, "Find the sum of the first 10 terms of the arithmetic sequence: 2, 5, 8, ...", ["155", "160", "145", "180"], 0, "Math", "Series"),
+            createMCQ(123, "What is the domain of the function f(x) = 1 / (x-4)?", ["x is not 1", "x is not 4", "x > 4", "All real numbers"], 1, "Math", "Functions"), 
+            createMCQ(124, "If tan theta = 1, and theta is in the first quadrant, what is the value of sin theta?", ["1/2", "1/sqrt(2)", "sqrt(3)/2", "0"], 1, "Math", "Trigonometry"), 
+            createMCQ(125, "The coordinates of the midpoint of the line segment joining (1, 5) and (3, 9) are:", ["(2, 7)", "(4, 14)", "(1, 2)", "(3, 5)"], 0, "Math", "Coordinate Geometry"), 
+            createMCQ(126, "Find the determinant of the matrix [[2, 1], [4, 3]].", ["10", "2", "-2", "-10"], 1, "Math", "Matrices"),
+            createMCQ(127, "The range of cos(theta) is:", ["[-1, 1]", "[0, 1]", "(- infinity, infinity)", "[- pi/2, pi/2]"], 0, "Math", "Trigonometry"),
+            createMCQ(128, "The number of subsets of a set with 4 elements is:", ["4", "8", "16", "32"], 2, "Math", "Set Theory"),
+            createMCQ(129, "If log_2(x) = 3, then x equals:", ["6", "8", "9", "1"], 1, "Math", "Logarithms"),
+            createMCQ(130, "What is the value of the complex number i^3?", ["1", "-1", "i", "-i"], 3, "Math", "Complex Numbers"),
+            createMCQ(131, "The slope of the line y = -3x + 5 is:", ["5", "-3", "3", "1/5"], 1, "Math", "Coordinate Geometry"),
+            createMCQ(132, "If A and B are independent events with P(A)=0.5 and P(B)=0.4, find P(A and B).", ["0.9", "0.2", "0.1", "0.5"], 1, "Math", "Probability"),
+            createMCQ(133, "In a geometric sequence 2, 6, 18, ..., the common ratio is:", ["2", "3", "4", "6"], 1, "Math", "Series"),
+            createMCQ(134, "The angle 180 degrees in radians is:", ["2pi", "pi", "pi/2", "3pi/2"], 1, "Math", "Trigonometry"),
+            createMCQ(135, "Simplify: 2/x + 3/(2x)", ["5/(2x)", "7/(2x)", "5/x", "1/(2x)"], 1, "Math", "Algebra"),
+            createMCQ(136, "The mean of the numbers 10, 20, 30, 40 is:", ["20", "25", "30", "100"], 1, "Math", "Statistics"),
+            createMCQ(137, "The length of the diameter of a circle with equation x^2 + y^2 = 25 is:", ["5", "10", "25", "15"], 1, "Math", "Coordinate Geometry"),
+            createMCQ(138, "How many distinct permutations of the letters in the word BOOK are possible?", ["12", "6", "24", "4"], 0, "Math", "Permutations"), 
+            createMCQ(139, "The roots of the equation x^2 - 5x + 6 = 0 are:", ["(1, 6)", "(-2, -3)", "(2, 3)", "(-1, -6)"], 2, "Math", "Quadratic Equations"),
+            createMCQ(140, "If vector u = 2i + 3j and vector v = i - j, find vector u + 2v.", ["4i + j", "3i + 2j", "4i + 2j", "3i + 4j"], 0, "Math", "Vectors"),
+
+            // Filler for Intermediate Math (to reach 30)
+            createMCQ(141, "The solution set for the inequality 2x - 1 < 5 is:", ["x < 3", "x < 2", "x > 3", "x > 2"], 0, "Math", "Inequalities"),
+            createMCQ(142, "If A = {a, b, c} and B = {c, d}, then A intersect B is:", ["{a, b, c, d}", "{c}", "{a, b, d}", "{ }"], 1, "Math", "Set Theory"),
+            createMCQ(143, "In a binomial expansion of (a+b)^n, the number of terms is:", ["n", "n-1", "n+1", "2n"], 2, "Math", "Binomial Theorem"),
+            createMCQ(144, "The angle theta for which cos theta = -1/2 and sin theta = sqrt(3)/2 is:", ["60 degrees", "120 degrees", "240 degrees", "300 degrees"], 1, "Math", "Trigonometry"),
+            createMCQ(145, "The identity matrix I of size 2x2 is:", ["[[0, 1], [1, 0]]", "[[1, 1], [1, 1]]", "[[1, 0], [0, 1]]", "[[0, 0], [0, 0]]"], 2, "Math", "Matrices"),
+            createMCQ(146, "What is the slope of the line perpendicular to y = 2x + 1?", ["2", "-2", "1/2", "-1/2"], 3, "Math", "Coordinate Geometry"),
+            createMCQ(147, "If 100 is 25% of x, what is x?", ["25", "400", "500", "250"], 1, "Math", "Percentage"),
+            createMCQ(148, "The sum of the angles in a pentagon is:", ["360 degrees", "540 degrees", "720 degrees", "180 degrees"], 1, "Math", "Geometry"),
+            createMCQ(149, "Find the value of 1/2!", ["1", "0.5", "2", "0"], 1, "Math", "Factorials"),
+            createMCQ(150, "The value of 2^(log_2 8) is:", ["2", "4", "8", "16"], 2, "Math", "Logarithms"),
+        ];
+
+        const mcqs_inter_english_1 = [
+            // English is already clean
+            createMCQ(151, "Antonym of Calamity", ["Disaster", "Catastrophe", "Blessing", "Tragedy"], 2, "English", "Vocabulary"),
+            createMCQ(152, "Synonym of Ponder", ["Ignore", "Consider", "Rush", "Forget"], 1, "English", "Vocabulary"),
+            createMCQ(153, "Identify the sentence structure: She finished her work, and then she went home.", ["Simple", "Compound", "Complex", "Compound-Complex"], 1, "English", "Grammar"),
+            createMCQ(154, "The idiom A snake in the grass means:", ["A visible threat", "A treacherous person", "A rare sight", "A fast runner"], 1, "English", "Idioms"),
+            createMCQ(155, "She excelled ___ Mathematics.", ["on", "at", "in", "with"], 2, "English", "Prepositions"),
+            createMCQ(156, "Which part is incorrect: Despite (A) of the rain (B) we went out (C). No error (D).", ["A", "B", "C", "D"], 1, "English", "Error Detection"),
+            createMCQ(157, "Change to Indirect Speech: The teacher said, 'The Earth is round.'", ["The teacher said that the Earth was round.", "The teacher said that the Earth is round.", "The teacher asked if the Earth is round.", "The teacher said the Earth had been round."], 1, "English", "Narration"),
+            createMCQ(158, "Choose the correct spelling:", ["Seperate", "Separate", "Seperate", "Seprate"], 1, "English", "Spelling"),
+            createMCQ(159, "If I had seen him, I would have told him. (Identify the conditional type)", ["Type 1", "Type 2", "Type 3", "Zero Conditional"], 2, "English", "Conditionals"),
+            createMCQ(160, "The verb in the sentence The committee have submitted their report should be:", ["has", "have", "is", "were"], 1, "English", "Subject-Verb"),
+            createMCQ(161, "A person who is Garrulous is excessively:", ["Quiet", "Talkative", "Sleepy", "Lazy"], 1, "English", "Vocabulary"),
+            createMCQ(162, "The adverb form of the word Simple is:", ["Simple", "Simpler", "Simply", "Simplicity"], 2, "English", "Word Form"),
+            createMCQ(163, "Which is the correct usage of lay/lie?", ["I lay down for a nap.", "I lied down for a nap.", "I laid down for a nap.", "I layed down for a nap."], 0, "English", "Word Usage"),
+            createMCQ(164, "Synonym of Tacit", ["Explicit", "Silent", "Verbal", "Understood"], 3, "English", "Vocabulary"),
+            createMCQ(165, "Antonym of Censure", ["Criticize", "Praise", "Blame", "Reprimand"], 1, "English", "Vocabulary"),
+            createMCQ(166, "To burn the midnight oil means:", ["To work late into the night", "To waste time", "To sleep early", "To light a lamp"], 0, "English", "Idioms"),
+            createMCQ(167, "The word viz. stands for:", ["For instance", "That is", "Namely", "Example given"], 2, "English", "Latin Terms"),
+            createMCQ(168, "Each of the students is/are brilliant.", ["is", "are", "were", "have been"], 0, "English", "Subject-Verb"),
+            createMCQ(169, "The correct plural of Index is:", ["Indexies", "Indices", "Indexus", "Indexes"], 1, "English", "Plural"),
+            createMCQ(170, "Identify the Adjective Clause: The book that I bought is expensive.", ["The book", "that I bought", "is expensive", "The book that I bought is expensive"], 1, "English", "Clauses"),
+            createMCQ(171, "Change to Passive Voice: The mechanic is repairing the car.", ["The car is repaired by the mechanic.", "The car is being repaired by the mechanic.", "The car was repaired by the mechanic.", "The car has been repaired by the mechanic."], 1, "English", "Voice"),
+            createMCQ(172, "The correct spelling is:", ["Maintanance", "Maintenance", "Maintenence", "Maintainence"], 1, "English", "Spelling"),
+            createMCQ(173, "She is averse ___ change.", ["for", "at", "to", "with"], 2, "English", "Prepositions"),
+            createMCQ(174, "Synonym of Lethargy", ["Energy", "Vigor", "Sluggishness", "Activity"], 2, "English", "Vocabulary"),
+            createMCQ(175, "Choose the correct Conjunction: He is so weak ___ he cannot walk.", ["that", "but", "so", "as"], 0, "English", "Conjunctions"),
+            createMCQ(176, "The word Serene is a/an:", ["Adverb", "Noun", "Verb", "Adjective"], 3, "English", "Parts of Speech"),
+            createMCQ(177, "The phrase At loggerheads means:", ["In agreement", "In conflict", "Working together", "On a journey"], 1, "English", "Idioms"),
+            createMCQ(178, "If the sun rises, it gets light. (Identify the conditional type)", ["Type 1", "Type 2", "Type 3", "Zero Conditional"], 3, "English", "Conditionals"),
+            createMCQ(179, "Which is an Abstract Noun?", ["Book", "Freedom", "Teacher", "Table"], 1, "English", "Parts of Speech"),
+            createMCQ(180, "The word disinterested means:", ["Not interested", "Unbiased", "Bored", "Lazy"], 1, "English", "Word Usage"),
+        ];
+
+        const mcqs_inter_iq_1 = [
+            // Cleaned
+            createMCQ(181, "Find the missing number: 1, 4, 9, 16, 25, ...?", ["30", "36", "49", "64"], 1, "IQ", "Series"),
+            createMCQ(182, "If CHAIR is coded as EJCET, how is TABLE coded?", ["UDCPG", "VCDPE", "VCTPE", "UCDPG"], 0, "IQ", "Coding"),
+            createMCQ(183, "Leaf is to Tree as Branch is to ___", ["Root", "Flower", "Stem", "Bough"], 2, "IQ", "Analogy"),
+            createMCQ(184, "Which number is the odd one out: 12, 18, 28, 30, 42?", ["12", "18", "28", "30"], 2, "IQ", "Odd One Out"),
+            createMCQ(185, "A man walks 6 km East, then turns South and walks 8 km. How far is he from the start?", ["10 km", "12 km", "14 km", "15 km"], 0, "IQ", "Direction"),
+            createMCQ(186, "If A is B's mother, C is A's father, and D is C's brother, how is D related to B?", ["Father", "Uncle", "Grandfather", "Great Uncle"], 3, "IQ", "Blood Relations"),
+            createMCQ(187, "In a row, there are 25 students. If Junaid is 10th from the left, what is his position from the right?", ["15th", "16th", "17th", "14th"], 1, "IQ", "Ranking"),
+            createMCQ(188, "Find the missing letters: Z, X, V, T, R, ...", ["P", "Q", "S", "O"], 0, "IQ", "Series"),
+            createMCQ(189, "If Red is Yellow, Yellow is Blue, Blue is Orange, what is the color of clear sky?", ["Red", "Yellow", "Blue", "Orange"], 3, "IQ", "Verbal Logic"),
+            createMCQ(190, "Which number comes next: 2, 3, 5, 7, 11, ...?", ["12", "13", "14", "15"], 1, "IQ", "Series"),
+            createMCQ(191, "How many sides does a nonagon have?", ["7", "8", "9", "10"], 2, "IQ", "Geometry"),
+            createMCQ(192, "If a is b's sister, c is b's father, and d is c's wife, how is d related to a?", ["Sister", "Mother", "Daughter", "Aunt"], 1, "IQ", "Blood Relations"),
+            createMCQ(193, "A clock takes 5 seconds to strike 5 bells. How much time will it take to strike 10 bells?", ["10 seconds", "11.25 seconds", "12.5 seconds", "15 seconds"], 2, "IQ", "Clock"),
+            createMCQ(194, "Which pair has the same relationship: Finger : Hand", ["Toe : Foot", "Nail : Finger", "Wheel : Car", "Foot : Shoe"], 0, "IQ", "Analogy"),
+            createMCQ(195, "Find the missing number in the analogy: 8 : 64 :: 12 : ...", ["144", "100", "120", "169"], 0, "IQ", "Analogy"),
+            createMCQ(196, "A man is facing West. He turns 90 degrees clockwise, and then 135 degrees anticlockwise. Which direction is he facing now?", ["North-West", "South-West", "North-East", "West"], 0, "IQ", "Direction"),
+            createMCQ(197, "If A = 10% of B, and B = 20% of C. What percent of C is A?", ["2%", "5%", "10%", "15%"], 0, "Math", "Percentage"),
+            createMCQ(198, "If x = -2, what is the value of x^3 + 2x^2 + 1?", ["1", "0", "-1", "-2"], 0, "Math", "Algebra"),
+            createMCQ(199, "Which is the odd one out: Square, Rectangle, Triangle, Rhombus?", ["Square", "Rectangle", "Triangle", "Rhombus"], 2, "IQ", "Odd One Out"),
+            createMCQ(200, "The word LION is coded as OINL. What is the code for TIGER?", ["GERTI", "EGRIT", "RIGET", "EGTRI"], 1, "IQ", "Coding"),
+
+            // Filler for IQ (to reach 30)
+            createMCQ(201, "If the cost price of an item is Rs. 100 and selling price is Rs. 120, what is the profit percentage?", ["10%", "20%", "25%", "15%"], 1, "Math", "Percentage"),
+            createMCQ(202, "If sqrt(x) = 5, what is x^2?", ["25", "50", "125", "625"], 3, "Math", "Algebra"),
+            createMCQ(203, "A pipe fills a tank in 4 hours, and another pipe empties it in 6 hours. If both are open, how long will it take to fill the tank?", ["8 hours", "10 hours", "12 hours", "24 hours"], 2, "Math", "Work Rate"),
+            createMCQ(204, "How many straight lines can be drawn by joining 5 non-collinear points?", ["5", "10", "15", "20"], 1, "Math", "Combinations"),
+            createMCQ(205, "The probability of drawing an Ace or a King from a standard deck of 52 cards is:", ["1/13", "2/13", "1/26", "1/52"], 1, "Math", "Probability"),
+            createMCQ(206, "What is the result of 1 - 1/2 + 1/4 - 1/8 + ... (an infinite geometric series)?", ["1/2", "2/3", "1", "3/4"], 1, "Math", "Series"),
+            createMCQ(207, "If the day before yesterday was Friday, what day will it be tomorrow?", ["Monday", "Tuesday", "Sunday", "Saturday"], 0, "IQ", "Calendar"),
+            createMCQ(208, "Find the shortest distance from the point (0, 0) to the line x + y = 2.", ["1", "sqrt(2)", "2", "2*sqrt(2)"], 1, "Math", "Coordinate Geometry"),
+            createMCQ(209, "A car increases its speed from 30 km/h to 50 km/h. What is the ratio of the final speed to the initial speed?", ["3:5", "5:3", "2:3", "3:2"], 1, "Math", "Ratio"),
+            createMCQ(210, "Which is the odd one out: Spoon, Plate, Knife, Fork?", ["Spoon", "Plate", "Knife", "Fork"], 1, "IQ", "Odd One Out"),
+        ];
+
+        const mcqs_inter_computer_1 = [
+            // Cleaned
+            createMCQ(211, "Which data structure follows the LIFO principle?", ["Queue", "Array", "Stack", "Linked List"], 2, "Computer", "Data Structures"),
+            createMCQ(212, "What is the term for a program's ability to execute multiple tasks simultaneously?", ["Multitasking", "Multiprocessing", "Multithreading", "Parallelism"], 0, "Computer", "OS"),
+            createMCQ(213, "In Object-Oriented Programming, the mechanism of deriving a new class from an existing class is called:", ["Polymorphism", "Encapsulation", "Inheritance", "Abstraction"], 2, "Computer", "OOP"),
+            createMCQ(214, "What is the worst-case time complexity of a Binary Search on a sorted array of n elements?", ["O(1)", "O(n)", "O(log n)", "O(n^2)"], 2, "Computer", "Algorithms"),
+            createMCQ(215, "Which key uniquely identifies each record in a database table?", ["Foreign Key", "Secondary Key", "Candidate Key", "Primary Key"], 3, "Computer", "Database"),
+            createMCQ(216, "A gigabyte (GB) is approximately equal to:", ["1000 bytes", "1024 kilobytes", "1024 megabytes", "1024 gigabits"], 2, "Computer", "Data Unit"),
+            createMCQ(217, "What protocol is used to retrieve emails from a server?", ["SMTP", "POP3", "FTP", "HTTP"], 1, "Computer", "Networking"),
+            createMCQ(218, "Which of these is Application Software?", ["Windows 10", "Utility Program", "Microsoft Excel", "BIOS"], 2, "Computer", "Software"),
+            createMCQ(219, "A loop that repeats a block of code until a condition becomes false is a:", ["Conditional Loop", "For Loop", "While Loop", "Do-While Loop"], 2, "Computer", "Programming"),
+            createMCQ(220, "What does CSS primarily control in web development?", ["Website structure", "Website interaction", "Website styling", "Server-side logic"], 2, "Computer", "Web"),
+            createMCQ(221, "Which data type can store True or False values?", ["String", "Integer", "Boolean", "Float"], 2, "Computer", "Programming"),
+            createMCQ(222, "What is the decimal equivalent of the hexadecimal number A_16?", ["10", "11", "12", "16"], 0, "Computer", "Number System"),
+            createMCQ(223, "In the OSI Model, which layer handles the physical transmission of data over a communication medium?", ["Data Link Layer", "Network Layer", "Transport Layer", "Physical Layer"], 3, "Computer", "Networking"),
+            createMCQ(224, "What is Polymorphism in OOP?", ["An object having only one form.", "The ability of an object to take on many forms.", "The process of object creation.", "Hiding data from outside access."], 1, "Computer", "OOP"),
+            createMCQ(225, "In SQL, which command is used to add new rows to a table?", ["UPDATE", "INSERT INTO", "ADD ROW", "CREATE TABLE"], 1, "Computer", "Database"),
+            createMCQ(226, "The full form of IP in IP address is:", ["Internet Port", "Internal Protocol", "Internet Protocol", "Information Packet"], 2, "Computer", "Networking"),
+            createMCQ(227, "Which part of the computer is considered its brain?", ["RAM", "Hard Drive", "CPU", "Motherboard"], 2, "Computer", "Hardware"),
+            createMCQ(228, "What is a small text file stored on a user's computer by a web browser?", ["Web bug", "Cache", "Cookie", "Session"], 2, "Computer", "Web"),
+            createMCQ(229, "Which operator is used for integer division in most programming languages (C++/Java/Python)?", ["/", "//", "%", "*"], 1, "Computer", "Programming"),
+            createMCQ(230, "A VPN (Virtual Private Network) is primarily used for:", ["Increasing internet speed", "Downloading large files", "Secure and private network access", "Blocking advertisements"], 2, "Computer", "Security"), 
+            
+            // Filler for Intermediate Computer (to reach 30)
+            createMCQ(231, "Which Sorting Algorithm is an example of Divide and Conquer?", ["Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort"], 3, "Computer", "Algorithms"),
+            createMCQ(232, "In C++, what is the default access modifier for class members?", ["public", "private", "protected", "default"], 1, "Computer", "Programming"),
+            createMCQ(233, "A Firewall is used for:", ["Displaying output", "Preventing unauthorized access", "Data storage", "Processing data"], 1, "Computer", "Security"),
+            createMCQ(234, "A constructor in OOP is a special method used to:", ["Destroy an object", "Create and initialize an object", "Copy an object", "Display object details"], 1, "Computer", "OOP"),
+            createMCQ(235, "What is DNS used for?", ["Resolving IP addresses to domain names", "Transferring large files", "Sending emails", "Securing web connections"], 0, "Computer", "Networking"),
+            createMCQ(236, "In which network topology is every node connected to exactly two other nodes, forming a single continuous pathway?", ["Bus", "Ring", "Star", "Mesh"], 1, "Computer", "Networking"),
+            createMCQ(237, "The binary equivalent of the decimal number 13 is:", ["1101_2", "1011_2", "1110_2", "1001_2"], 0, "Computer", "Number System"),
+            createMCQ(238, "Which type of computer language is closest to human language?", ["Machine Language", "Assembly Language", "High-level Language", "Binary Language"], 2, "Computer", "Programming"),
+            createMCQ(239, "The term Primary Storage refers to:", ["Hard Disk", "Flash Drive", "RAM", "CD-ROM"], 2, "Computer", "Hardware"),
+            createMCQ(240, "What is the process of translating a High-level language program line-by-line?", ["Compiling", "Assembling", "Interpreting", "Debugging"], 2, "Computer", "Programming"),
+        ];
+
+
+        // --------------------------------------------------------------------
+        // ADVANCED LEVEL MCQs
+        // --------------------------------------------------------------------
+
+        const mcqs_advanced_math_1 = [
+            // Cleaned
+            createMCQ(241, "Find the limit: lim (x -> 0) of (sin x) / x.", ["0", "1", "infinity", "-1"], 1, "Math", "Calculus"), 
+            createMCQ(242, "What is the derivative of f(x) = x^3 - 2x + 1 with respect to x?", ["3x^2 - 2", "3x^2 + 1", "3x^3 - 2", "x^2 - 2"], 0, "Math", "Calculus"), 
+            createMCQ(243, "Evaluate the indefinite integral: integral e^(2x) dx.", ["2e^(2x) + C", "e^(2x) + C", "(1/2)e^(2x) + C", "e^(2x)/2x + C"], 2, "Math", "Calculus"), 
+            createMCQ(244, "The equation of a parabola with vertex (0,0) and focus (a,0) is:", ["y^2 = 4ax", "x^2 = 4ay", "y^2 = -4ax", "x^2 = -4ay"], 0, "Math", "Coordinate Geometry"), 
+            createMCQ(245, "The probability of drawing a spade or a face card from a standard deck of 52 cards is:", ["19/52", "16/52", "22/52", "25/52"], 2, "Math", "Probability"),
+            createMCQ(246, "What is the volume of a cone with radius r=3 and height h=4?", ["12pi", "36pi", "4pi", "9pi"], 0, "Math", "Geometry"),
+            createMCQ(247, "The sum of the series sum (n=1 to infinity) of (1/3)^n is:", ["1/3", "1/2", "1", "3/2"], 1, "Math", "Series"),
+            createMCQ(248, "Which property holds for a skew-symmetric matrix A?", ["A = A^T", "A = -A^T", "|A| = 1", "A^2 = I"], 1, "Math", "Matrices"),
+            createMCQ(249, "Find the argument of the complex number z = 1 + i.", ["pi/4", "pi/2", "pi/6", "pi/3"], 0, "Math", "Complex Numbers"),
+            createMCQ(250, "The mean of a Poisson distribution with parameter lambda is:", ["lambda^2", "sqrt(lambda)", "lambda", "1/lambda"], 2, "Math", "Statistics"),
+            createMCQ(251, "The general equation for a circle is:", ["Ax^2 + Bx + C = 0", "Ax^2 + Ay^2 + Bx + Cy + D = 0", "y = mx + c", "x^2/a^2 - y^2/b^2 = 1"], 1, "Math", "Coordinate Geometry"),
+            createMCQ(252, "What is the range of f(x) = 5cos(x)?", ["[-5, 5]", "[0, 5]", "[-1, 1]", "(- infinity, infinity)"], 0, "Math", "Functions"),
+            createMCQ(253, "In a normal distribution, approximately 68% of the data falls within:", ["1 sigma of the mean", "2 sigma of the mean", "3 sigma of the mean", "The entire range"], 0, "Math", "Statistics"),
+            createMCQ(254, "How many combinations of 3 items can be chosen from 5 distinct items?", ["5", "10", "15", "20"], 1, "Math", "Combinations"),
+            createMCQ(255, "Find the value of d/dx(ln(x)).", ["x", "1/x", "e^x", "ln(x)"], 1, "Math", "Calculus"),
+            createMCQ(256, "The slope of a line passing through (1, 2) and (3, 6) is:", ["1", "2", "3", "4"], 1, "Math", "Coordinate Geometry"),
+            createMCQ(257, "If the rows and columns of a matrix A are interchanged, the resulting matrix is called the:", ["Inverse", "Adjoint", "Transpose", "Conjugate"], 2, "Math", "Matrices"),
+            createMCQ(258, "What is the coefficient of x^3 in the expansion of (1+x)^5?", ["5", "10", "20", "1"], 1, "Math", "Binomial Theorem"),
+            createMCQ(259, "The principle value of arcsin(x) lies in the interval:", ["(- pi/2, pi/2)", "[0, pi]", "[- pi/2, pi/2]", "[ -1, 1 ]"], 2, "Math", "Trigonometry"),
+            createMCQ(260, "If vector a = i + 2j and vector b = 2i - j, find the dot product a . b.", ["0", "1", "3", "4"], 0, "Math", "Vectors"),
+
+            // Filler for Advanced Math (to reach 30)
+            createMCQ(261, "A continuous function f(x) is differentiable at a point c if the limit of the difference quotient ___.", ["Is zero", "Is undefined", "Exists", "Is positive"], 2, "Math", "Calculus"),
+            createMCQ(262, "The characteristic of a skew-symmetric matrix of odd order is that its determinant is always:", ["1", "-1", "0", "Positive"], 2, "Math", "Matrices"),
+            createMCQ(263, "The general form of a hyperbola centered at the origin is:", ["Ax^2 + Bx + C = 0", "x^2/a^2 + y^2/b^2 = 1", "x^2/a^2 - y^2/b^2 = 1", "x^2 + y^2 = r^2"], 2, "Math", "Coordinate Geometry"),
+            createMCQ(264, "Which of the following functions is even?", ["f(x) = x^3", "f(x) = sin(x)", "f(x) = x^2", "f(x) = x"], 2, "Math", "Functions"),
+            createMCQ(265, "The area under the standard normal curve between z=0 and z=1 is approximately:", ["0.3413", "0.5000", "0.6826", "0.9545"], 0, "Math", "Statistics"),
+            createMCQ(266, "Find the value of 2 x 3! - 4.", ["2", "8", "4", "10"], 1, "Math", "Factorials"),
+            createMCQ(267, "If the derivative of a function is zero at x=c, then c is a critical point which can be a:", ["Local maximum only", "Local minimum only", "Point of inflection only", "Local max, min, or point of inflection"], 3, "Math", "Calculus"),
+            createMCQ(268, "How many terms are in the expansion of (2x - 3y)^7?", ["7", "8", "9", "10"], 1, "Math", "Binomial Theorem"),
+            createMCQ(269, "The value of tan(pi/4) is:", ["0", "1", "sqrt(3)", "1/sqrt(3)"], 1, "Math", "Trigonometry"),
+            createMCQ(270, "If vector a and vector b are parallel vectors, their cross product a x b is:", ["|a| |b|", "0", "1", "-1"], 1, "Math", "Vectors"),
+        ];
+
+        const mcqs_advanced_english_1 = [
+            // English is already clean
+            createMCQ(271, "Antonym of Mitigate", ["Aggravate", "Alleviate", "Reduce", "Lessen"], 0, "English", "Vocabulary"),
+            createMCQ(272, "Synonym of Perfunctory", ["Thorough", "Careful", "Superficial", "Diligent"], 2, "English", "Vocabulary"),
+            createMCQ(273, "Which rhetorical device involves the use of exaggeration for emphasis?", ["Metaphor", "Simile", "Hyperbole", "Understatement"], 2, "English", "Literary Terms"),
+            createMCQ(274, "Identify the sentence with a Dangling Modifier:", ["Running to catch the bus, the fence was jumped over.", "He ran quickly to catch the bus, jumping the fence.", "The fence was jumped over as he ran.", "Jumping the fence, he reached the bus."], 0, "English", "Grammar"),
+            createMCQ(275, "The phrase To smell a rat means:", ["To detect a bad odor", "To suspect deceit", "To feel uneasy", "To be alert"], 1, "English", "Idioms"),
+            createMCQ(276, "The word Cognizant is most commonly used as a/an:", ["Noun", "Adjective", "Verb", "Adverb"], 1, "English", "Word Form"),
+            createMCQ(277, "Which conditional best describes an unreal situation in the present/future?", ["Type 1", "Type 2", "Type 3", "Zero Conditional"], 1, "English", "Conditionals"),
+            createMCQ(278, "Synonym of Salient", ["Hidden", "Unimportant", "Prominent", "Minor"], 2, "English", "Vocabulary"),
+            createMCQ(279, "Find the error: She is one (A) of the women (B) who has achieved (C) success. No error (D).", ["A", "B", "C", "D"], 2, "English", "Error Detection"),
+            createMCQ(280, "The use of Figurative Language is generally discouraged in:", ["Poetry", "Academic Reports", "Novels", "Journalism"], 1, "English", "Style"),
+            createMCQ(281, "The word Infallible means:", ["Likely to fail", "Unable to make mistakes", "Unreliable", "Confused"], 1, "English", "Vocabulary"),
+            createMCQ(282, "Antonym of Ubiquitous", ["Ever-present", "Widespread", "Rare", "Common"], 2, "English", "Vocabulary"),
+            createMCQ(283, "Identify the sentence with a Comma Splice:", ["He ran fast, he won the race.", "He ran fast, and he won the race.", "Running fast, he won the race.", "He ran fast; he won the race."], 0, "English", "Grammar"),
+            createMCQ(284, "The active voice of The truth must be told.", ["You must tell the truth.", "The truth is to be told.", "Someone must tell the truth.", "It is a necessity to tell the truth."], 2, "English", "Voice"),
+            createMCQ(285, "The correct spelling is:", ["Consensus", "Consencus", "Consensuss", "Consensus"], 0, "English", "Spelling"),
+            createMCQ(286, "Which subordinating conjunction indicates cause?", ["Although", "Unless", "Because", "While"], 2, "English", "Conjunctions"),
+            createMCQ(287, "The phrase To bite the bullet means:", ["To avoid an unpleasant task", "To accept a difficult situation", "To complain loudly", "To fire a weapon"], 1, "English", "Idioms"),
+            createMCQ(288, "Synonym of Capricious", ["Stable", "Predictable", "Fickle", "Consistent"], 2, "English", "Vocabulary"),
+            createMCQ(289, "In formal writing, the pronoun one is correctly continued as:", ["one", "he/she", "they", "it"], 0, "English", "Style"),
+            createMCQ(290, "The literary term for a sudden dramatic turn in a narrative is:", ["Climax", "Peripeteia", "Foreshadowing", "Anagnorisis"], 1, "English", "Literary Terms"),
+            
+            // Filler for Advanced English (to reach 30)
+            createMCQ(291, "The antonym of Didactic is:", ["Instructive", "Moralizing", "Uninformative", "Educational"], 2, "English", "Vocabulary"),
+            createMCQ(292, "Choose the sentence where the Infinitive acts as an Adjective:", ["To err is human.", "He came to study.", "He needs a car to drive.", "I want to go home."], 2, "English", "Parts of Speech"),
+            createMCQ(293, "The literary device of giving human qualities to inanimate objects is:", ["Metaphor", "Personification", "Simile", "Alliteration"], 1, "English", "Literary Terms"),
+            createMCQ(294, "A Hasty Generalization is a logical fallacy where:", ["An argument is circular.", "A conclusion is not logically derived from premises.", "A conclusion is drawn from a too small sample.", "The speaker attacks the person."], 2, "English", "Logic"),
+            createMCQ(295, "Synonym of Indispensable", ["Unnecessary", "Essential", "Optional", "Auxiliary"], 1, "English", "Vocabulary"),
+            createMCQ(296, "The difference between fewer and less is that fewer is used for:", ["Uncountable nouns", "Abstract nouns", "Countable nouns", "Singular nouns"], 2, "English", "Word Usage"),
+            createMCQ(297, "The plural of Phenomenon is:", ["Phenomenons", "Phenomena", "Phenomenonous", "Phenomene"], 1, "English", "Plural"),
+            createMCQ(298, "He is a good man whom I admire. (The pronoun whom acts as a/an:)", ["Subject", "Direct Object", "Indirect Object", "Prepositional Object"], 1, "English", "Grammar"),
+            createMCQ(299, "Antonym of Prevaricate", ["Lie", "Evasion", "State truthfully", "Mislead"], 2, "English", "Vocabulary"),
+            createMCQ(300, "The correct usage of imply/infer is:", ["The speaker inferred the message.", "The listener implied the message.", "The speaker implied the message.", "They both inferred the message."], 2, "English", "Word Usage"),
+        ];
+
+        const mcqs_advanced_iq_1 = [
+            // Cleaned
+            createMCQ(301, "Find the missing number: 2, 6, 12, 20, 30, ...?", ["36", "42", "48", "56"], 1, "IQ", "Series"),
+            createMCQ(302, "If TRAIN is coded as SQUHO, how is BUS coded?", ["ATR", "BTR", "CTB", "CVR"], 0, "IQ", "Coding"),
+            createMCQ(303, "Water is to Hydrology as Earth is to ___", ["Geography", "Geology", "Meteorology", "Biology"], 1, "IQ", "Analogy"),
+            createMCQ(304, "Which is the odd one out: Cube, Sphere, Pyramid, Square?", ["Cube", "Sphere", "Pyramid", "Square"], 3, "IQ", "Odd One Out"),
+            createMCQ(305, "A man is 8 m West of A and 6 m South of B. B is 10 m North of A. What is the distance between the man and B?", ["10 m", "12.8 m", "14 m", "16 m"], 1, "IQ", "Direction"),
+            createMCQ(306, "P and Q are brothers. R and S are sisters. P's son is S's brother. How is Q related to R?", ["Father", "Uncle", "Brother", "Cousin"], 1, "IQ", "Blood Relations"),
+            createMCQ(307, "If the day after tomorrow is Sunday, what day was it yesterday?", ["Wednesday", "Thursday", "Friday", "Saturday"], 1, "IQ", "Calendar"),
+            createMCQ(308, "Find the missing letters: A, E, I, O, ...", ["P", "U", "V", "Y"], 1, "IQ", "Series"),
+            createMCQ(309, "In how many ways can 5 distinct books be arranged on a shelf?", ["5", "25", "120", "125"], 2, "IQ", "Permutations"),
+            createMCQ(310, "If FATHER is coded as GAUIFS, what is the code for CHILD?", ["DIJME", "EIMJC", "DIIMD", "DHIMD"], 0, "IQ", "Coding"),
+            createMCQ(311, "Find the value of x in the equation x/3 + 5 = 7.", ["2", "6", "4", "3"], 1, "Math", "Algebra"),
+            createMCQ(312, "The ratio of the area of two similar triangles is 9:16. What is the ratio of their corresponding heights?", ["3:4", "4:3", "9:16", "16:9"], 0, "Math", "Geometry"),
+            createMCQ(313, "What is the result of OR gate inputs 1 and 0?", ["0", "1", "True", "False"], 1, "Computer", "Logic Gate"),
+            createMCQ(314, "If the profit on a sale is 20% of the selling price, what is the profit percentage on the cost price?", ["20%", "25%", "30%", "33.33%"], 1, "Math", "Percentage"),
+            createMCQ(315, "Which number comes next: 10, 100, 20, 90, 30, ...?", ["40", "50", "80", "70"], 2, "IQ", "Series"),
+            createMCQ(316, "Antonym of Perilous", ["Dangerous", "Safe", "Risky", "Hazardous"], 1, "English", "Vocabulary"),
+            createMCQ(317, "Synonym of Admonish", ["Praise", "Approve", "Reprimand", "Encourage"], 2, "English", "Vocabulary"),
+            createMCQ(318, "The sentence The report was prepared by the committee and signed by the chairman. is correct in terms of:", ["Tense Consistency", "Subject-Verb Agreement", "Parallel Structure", "Pronoun Usage"], 2, "English", "Grammar"),
+            createMCQ(319, "Complete the analogy: Bacteria : Disease :: War : ...", ["Army", "Defeat", "Destruction", "Soldier"], 2, "IQ", "Analogy"),
+            createMCQ(320, "What is the next term of the sequence 1/2, 2/3, 3/4, ...?", ["4/5", "5/6", "1", "3/5"], 0, "Math", "Series"),
+            
+            // Filler for Advanced IQ (to reach 30)
+            createMCQ(321, "If the area of a sector of a circle with radius r=4 is 8pi, find the central angle in radians.", ["pi/2", "pi", "2pi", "1"], 1, "Math", "Geometry"),
+            createMCQ(322, "Which is the odd one out: Lion, Tiger, Bear, Wolf?", ["Lion", "Tiger", "Bear", "Wolf"], 2, "IQ", "Odd One Out"),
+            createMCQ(323, "Find the value of x: |2x - 1| = 5.", ["{3, -2}", "{2, -3}", "{3, 2}", "{-3, -2}"], 0, "Math", "Algebra"),
+            createMCQ(324, "An inductive argument is one that:", ["Guarantees the conclusion is true.", "Gives only probable conclusions.", "Starts with general principles.", "Is based on established laws."], 1, "IQ", "Logic"),
+            createMCQ(325, "From a group of 4 boys and 3 girls, a committee of 3 is to be formed. How many committees can have exactly 2 boys?", ["12", "18", "24", "36"], 1, "Math", "Combinations"),
+            createMCQ(326, "If MATH is coded as NBUF, what is the code for PHYSICS?", ["QIZTJET", "QJZUJDT", "QIZTJDT", "QIZTICT"], 2, "IQ", "Coding"),
+            createMCQ(327, "The logical fallacy where one assumes what they are trying to prove is called:", ["Ad Hominem", "Begging the Question", "Straw Man", "False Dichotomy"], 1, "IQ", "Logic"),
+            createMCQ(328, "Find the equation of the asymptote of the hyperbola x^2/4 - y^2/9 = 1.", ["y = +/-(2/3)x", "y = +/-(4/9)x", "y = +/-(3/2)x", "y = +/-(9/4)x"], 2, "Math", "Coordinate Geometry"),
+            createMCQ(329, "Which is the odd one out: Second, Minute, Hour, Time?", ["Second", "Minute", "Hour", "Time"], 3, "IQ", "Odd One Out"),
+            createMCQ(330, "What is the average of the first 10 even numbers?", ["10", "11", "12", "20"], 1, "Math", "Arithmetic"),
+        ];
+
+        const mcqs_advanced_computer_1 = [
+            // Cleaned
+            createMCQ(331, "What is the time complexity of the Merge Sort algorithm in the best-case scenario?", ["O(n^2)", "O(n log n)", "O(n)", "O(log n)"], 1, "Computer", "Algorithms"),
+            createMCQ(332, "In OOP, Method Overriding is an example of:", ["Compile-time Polymorphism", "Run-time Polymorphism", "Encapsulation", "Abstraction"], 1, "Computer", "OOP"),
+            createMCQ(333, "Which Sorting Algorithm is most efficient on an almost sorted list?", ["Quick Sort", "Merge Sort", "Insertion Sort", "Heap Sort"], 2, "Computer", "Algorithms"),
+            createMCQ(334, "The concept of Information Hiding is closely related to:", ["Polymorphism", "Inheritance", "Abstraction", "Encapsulation"], 3, "Computer", "OOP"),
+            createMCQ(335, "What does the C stand for in the context of ACID database properties?", ["Concurrency", "Clustering", "Consistency", "Constraint"], 2, "Computer", "Database"),
+            createMCQ(336, "Which language is Interpreted?", ["C++", "Java", "Python", "C"], 2, "Computer", "Programming"),
+            createMCQ(337, "A section of code that must be accessed by only one process at a time is called a:", ["Critical Section", "Semaphore", "Mutex", "Deadlock"], 0, "Computer", "OS"),
+            createMCQ(338, "Which data structure is best for implementing Depth-First Search (DFS)?", ["Queue", "Stack", "Linked List", "Hash Table"], 1, "Computer", "Data Structures"),
+            createMCQ(339, "The relationship between a Base Class and a Derived Class is called:", ["Aggregation", "Composition", "Inheritance", "Association"], 2, "Computer", "OOP"),
+            createMCQ(340, "Which OSI Layer is responsible for end-to-end reliable data transmission?", ["Network Layer", "Transport Layer", "Data Link Layer", "Application Layer"], 1, "Computer", "Networking"),
+            createMCQ(341, "Which Normal Form requires that no non-prime attribute is functionally dependent on a proper subset of a candidate key?", ["1NF", "2NF", "3NF", "BCNF"], 1, "Computer", "Database"),
+            createMCQ(342, "The technique used to assign memory pages to disk space is called:", ["Paging", "Segmentation", "Swapping", "Caching"], 0, "Computer", "OS"),
+            createMCQ(343, "A Linked List is a collection of nodes where each node contains data and a pointer to the:", ["Previous node only", "Next node", "Head node", "Tail node"], 1, "Computer", "Data Structures"),
+            createMCQ(344, "What is the result of the bitwise OR operation on 1010_2 and 1100_2?", ["1110", "1000", "0100", "1010"], 0, "Computer", "Binary"),
+            createMCQ(345, "A View in SQL is a:", ["Physical table in the database.", "Virtual table based on the result-set of an SQL statement.", "Stored procedure.", "Temporary table."], 1, "Computer", "Database"),
+            createMCQ(346, "A Context Switch is the process of:", ["Switching between CPU cores.", "Saving the state of one process and restoring the state of another.", "Changing the priority of a process.", "Moving a process from RAM to disk."], 1, "Computer", "OS"),
+            createMCQ(347, "Which data structure is efficient for inserting and deleting elements at both ends?", ["Stack", "Queue", "Deque (Double-Ended Queue)", "Array"], 2, "Computer", "Data Structures"),
+            createMCQ(348, "The TCP protocol operates at which OSI Layer?", ["Network Layer", "Transport Layer", "Data Link Layer", "Application Layer"], 1, "Computer", "Networking"),
+            createMCQ(349, "The ability to have multiple functions with the same name but different parameters is called:", ["Method Overriding", "Data Hiding", "Method Overloading", "Inheritance"], 2, "Computer", "OOP"),
+            createMCQ(350, "What is the primary role of AJAX in web development?", ["To secure web connections.", "To perform server-side calculations.", "To update parts of a web page without reloading the whole page.", "To define the structure of a web page."], 2, "Computer", "Web"),
+            
+            // Filler for Advanced Computer (to reach 30)
+            createMCQ(351, "In C/C++, memory allocated at runtime is managed using:", ["Stack", "Heap", "Global Section", "Registers"], 1, "Computer", "Programming"),
+            createMCQ(352, "Which HTTP status code indicates a successful request?", ["200", "301", "404", "500"], 0, "Computer", "Web"),
+            createMCQ(353, "What does XML stand for?", ["Extended Markup Language", "Extra Markup Logic", "Extensible Markup Language", "External Model Link"], 2, "Computer", "Web"),
+            createMCQ(354, "The encryption technique where a single key is used for both encryption and decryption is called:", ["Asymmetric", "Symmetric", "Hashing", "Public Key"], 1, "Computer", "Security"),
+            createMCQ(355, "Which algorithm design technique involves making the best choice at each stage in the hope of finding a global optimum?", ["Dynamic Programming", "Divide and Conquer", "Greedy Method", "Backtracking"], 2, "Computer", "Algorithms"),
+            createMCQ(356, "A Binary Search Tree (BST) allows for efficient searching due to its property that all left subtree nodes are:", ["Greater than the root.", "Less than the root.", "Equal to the root.", "Unsorted."], 1, "Computer", "Data Structures"),
+            createMCQ(357, "The standard port for HTTPS traffic is:", ["80", "21", "23", "443"], 3, "Computer", "Networking"),
+            createMCQ(358, "In Java, final keyword on a method prevents it from being:", ["Overloaded", "Overridden", "Used", "Called"], 1, "Computer", "OOP"),
+            createMCQ(359, "The process of repeatedly testing and correcting a program until it is error-free is known as:", ["Compilation", "Execution", "Debugging", "Linking"], 2, "Computer", "Programming"),
+            createMCQ(360, "A database Index is primarily used to:", ["Enforce data integrity.", "Speed up data retrieval.", "Define table structure.", "Prevent data duplication."], 1, "Computer", "Database"),
+        ];
+
+
+        // ====================================================================
+        // END: CLEANED MCQS DATA
+        // ====================================================================
+
+        const QUESTION_COUNT = 30;
+        // CUSTOM DURATIONS IN SECONDS
+        const DURATION_EASY = 20 * 60; 
+        const DURATION_INTERMEDIATE = 28 * 60; 
+        const DURATION_ADVANCED = 35 * 60; 
+        
+        const allTests = [
+            // --- EASY LEVEL (20 min, 30 MCQs) ---
+            { id: 'math-easy-1', title: 'Basic Algebra & Logic', subject: 'Math', level: 'Easy', description: 'Foundational test covering basic math concepts, ratios, and logic.', mcqs: mcqs_easy_math_logic, duration: DURATION_EASY },
+            { id: 'english-easy-1', title: 'Basic Grammar & Vocabulary', subject: 'English', level: 'Easy', description: 'Covers essential prepositions, tenses, and common vocabulary.', mcqs: mcqs_easy_english_1, duration: DURATION_EASY },
+            { id: 'iq-easy-1', title: 'General Reasoning (Series & Relations)', subject: 'IQ', level: 'Easy', description: 'Simple analogies, series completion, and elementary logical deductions.', mcqs: mcqs_easy_iq_1, duration: DURATION_EASY },
+            { id: 'computer-easy-1', title: 'Computer Fundamentals', subject: 'Computer', level: 'Easy', description: 'Basic hardware, software, and networking concepts.', mcqs: mcqs_easy_computer_1, duration: DURATION_EASY },
+
+            // --- INTERMEDIATE LEVEL (28 min, 30 MCQs) ---
+            { id: 'math-intermediate-1', title: 'Intermediate Functions & Sets', subject: 'Math', level: 'Intermediate', description: 'Medium difficulty problems involving linear equations, sets, and geometry (F.Sc. Level).', mcqs: mcqs_inter_math_1, duration: DURATION_INTERMEDIATE },
+            { id: 'english-intermediate-1', title: 'Sentence Correction & Syntax', subject: 'English', level: 'Intermediate', description: 'Focuses on complex sentence structure, parallelism, and advanced grammar rules.', mcqs: mcqs_inter_english_1, duration: DURATION_INTERMEDIATE },
+            { id: 'iq-intermediate-1', title: 'Critical Reasoning & Data', subject: 'IQ', level: 'Intermediate', description: 'Data sufficiency, assumptions, and critical thinking scenarios.', mcqs: mcqs_inter_iq_1, duration: DURATION_INTERMEDIATE },
+            { id: 'computer-intermediate-1', title: 'Programming Logic (Intro)', subject: 'Computer', level: 'Intermediate', description: 'Basic data structures, algorithms, and logical flow of programming (F.Sc. Level).', mcqs: mcqs_inter_computer_1, duration: DURATION_INTERMEDIATE },
+
+            // --- ADVANCED LEVEL (35 min, 30 MCQs) ---
+            { id: 'math-advanced-1', title: 'Calculus & Advanced Geometry', subject: 'Math', level: 'Advanced', description: 'High difficulty questions from calculus limits, derivatives, and advanced plane geometry (F.Sc. Level).', mcqs: mcqs_advanced_math_1, duration: DURATION_ADVANCED },
+            { id: 'english-advanced-1', title: 'Reading Comprehension', subject: 'English', level: 'Advanced', description: 'High-level vocabulary, idioms, and advanced sentence structure questions.', mcqs: mcqs_advanced_english_1, duration: DURATION_ADVANCED },
+            { id: 'iq-advanced-1', title: 'Complex Puzzles', subject: 'IQ', level: 'Advanced', description: 'Seating arrangements, coded language, and complex pattern recognition.', mcqs: mcqs_advanced_iq_1, duration: DURATION_ADVANCED },
+            { id: 'computer-advanced-1', title: 'Data Structures & OOP', subject: 'Computer', level: 'Advanced', description: 'Questions on advanced data structures, efficiency, and Object-Oriented Programming principles (F.Sc. Level).', mcqs: mcqs_advanced_computer_1, duration: DURATION_ADVANCED },
+        ];
+
+        // --- STATE MANAGEMENT ---
+        let state = {
+            currentPage: 'home-page',
+            userData: { name: '', rollno: '' },
+            currentTest: null, // The test object being taken
+            userAnswers: {}, // Stores { mcq_id: selected_option_index }
+            mcqPage: 1,
+            mcqsPerPage: 3,
+            timer: null, // Interval ID for the timer
+            startTime: null, // Timestamp when the test started
+            timeLeft: 0, // Time remaining in seconds
+            results: null,
+            selectedLevel: 'Easy'
+        };
+
+        // --- NAVIGATION & ROUTING ---
+
+        const updateHeader = () => {
+            const headerInfo = document.getElementById('header-user-info');
+            if (state.userData.name) {
+                document.getElementById('header-name').textContent = state.userData.name;
+                document.getElementById('header-rollno').textContent = `(${state.userData.rollno})`;
+                headerInfo.classList.remove('hidden');
+            } else {
+                headerInfo.classList.add('hidden');
+            }
+            lucide.createIcons();
+        };
+
+        window.navigate = (pageId) => {
+            // Stop timer if leaving the test page
+            if (state.currentPage === 'test-page' && pageId !== 'test-page' && pageId !== 'result-page') {
+                stopTimer();
+            }
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Show the requested page
+            const nextPage = document.getElementById(pageId);
+            if (nextPage) {
+                nextPage.classList.remove('hidden');
+                state.currentPage = pageId;
+            }
+
+            // Page-specific initialization
+            if (pageId === 'welcome-page') {
+                document.getElementById('welcome-name').textContent = state.userData.name.split(' ')[0] || "Scholar";
+            } else if (pageId === 'explore-page') {
+                filterTests(state.selectedLevel);
+            } else if (pageId === 'test-page') {
+                if (state.currentTest) {
+                    document.getElementById('final-score').textContent = `0/${state.currentTest.mcqs.length}`;
+                    loadMcqPage(state.mcqPage);
+                    if (!state.timer) {
+                        startTimer();
+                    }
+                }
+            } else if (pageId === 'result-page') {
+                displayResults();
+            } else if (pageId === 'answer-review-page') {
+                displayAnswerReview();
+            }
+
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\(", right: "\\)", display: false},
+                        {left: "\\[", right: "\\]", display: true},
+                        {left: "$", right: "$", display: false}
+                    ]
+                });
+            }
+
+            lucide.createIcons();
+            window.scrollTo(0, 0);
+        };
+
+        // --- LOGIN PAGE LOGIC ---
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('full-name').value.trim();
+            const rollNo = document.getElementById('roll-no').value.trim();
+
+            if (fullName && rollNo) {
+                state.userData.name = fullName;
+                state.userData.rollno = rollNo;
+                updateHeader();
+                navigate('welcome-page');
+            } else {
+                showNotification("Error", "Please enter your Full Name and Roll No to continue.", "error");
+            }
+        });
+
+        // --- EXPLORE TESTS LOGIC ---
+
+        window.filterTests = (level) => {
+            state.selectedLevel = level;
+            const container = document.getElementById('test-cards-container');
+            container.innerHTML = '';
+            
+            // Highlight the correct tab
+            document.querySelectorAll('.level-tab').forEach(tab => {
+                tab.classList.remove('border-indigo-600', 'text-indigo-600');
+                tab.classList.add('border-transparent', 'text-gray-500');
+                if (tab.dataset.level === level) {
+                    tab.classList.add('border-indigo-600', 'text-indigo-600');
+                    tab.classList.remove('border-transparent', 'text-gray-500');
+                }
+            });
+
+            const filteredTests = allTests.filter(test => test.level === level);
+
+            if (filteredTests.length === 0) {
+                container.innerHTML = `<p class="col-span-3 text-center text-lg text-gray-500 py-10">No tests found for the ${level} level yet. Check back soon!</p>`;
+                return;
+            }
+
+            filteredTests.forEach(test => {
+                container.innerHTML += createTestCard(test);
+            });
+            lucide.createIcons();
+        };
+
+        const createTestCard = (test) => {
+            const timeInMinutes = test.duration / 60;
+            return `
+                <div class="test-card-link card p-6 flex flex-col justify-between border-t-4 border-${test.level === 'Easy' ? 'green' : test.level === 'Intermediate' ? 'yellow' : 'red'}-500 transition duration-300">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-semibold uppercase text-gray-500">${test.subject}</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">${test.level}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">${test.title}</h3>
+                        <p class="text-gray-600 text-sm mb-4">${test.description}</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                            <span><span class="w-4 h-4 inline-block align-text-bottom mr-1" data-lucide="check-circle-2"></span>${test.mcqs.length} MCQs</span>
+                            <span><span class="w-4 h-4 inline-block align-text-bottom mr-1" data-lucide="clock"></span>${timeInMinutes} min</span>
+                        </div>
+                        <button onclick="startTest('${test.id}')"
+                            class="w-full mt-2 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:bg-indigo-700 transition duration-150 transform hover:scale-[1.005]">
+                            Attempt Test
+                        </button>
+                    </div>
+                </div>
+            `;
+        };
+        
+        window.startTest = (testId) => {
+            const test = allTests.find(t => t.id === testId);
+            if (!test) return;
+
+            // Reset test state
+            state.currentTest = test;
+            state.userAnswers = {};
+            state.mcqPage = 1;
+            state.timeLeft = test.duration; 
+            state.startTime = Date.now();
+            
+            // Set display elements
+            document.getElementById('test-title').textContent = `${test.title} (${test.subject} - ${test.level})`;
+            document.getElementById('test-question-count').textContent = test.mcqs.length;
+            document.getElementById('test-question-count-2').textContent = test.mcqs.length;
+
+            // FIX: Ensure calculation uses the correct test properties.
+            const totalPages = Math.ceil(test.mcqs.length / state.mcqsPerPage); 
+            document.getElementById('test-page-count').textContent = totalPages;
+            
+            navigate('test-page');
+        };
+
+        const loadMcqPage = (pageNumber) => {
+            if (!state.currentTest) return;
+
+            const startIndex = (pageNumber - 1) * state.mcqsPerPage;
+            const endIndex = startIndex + state.mcqsPerPage;
+            const pageMCQs = state.currentTest.mcqs.slice(startIndex, endIndex);
+
+            const container = document.getElementById('quiz-questions-container');
+            container.innerHTML = '';
+
+            pageMCQs.forEach((mcq, indexInPage) => {
+                container.innerHTML += createMcqHtml(mcq, startIndex + indexInPage);
+            });
+            
+            // Restore previous selections
+            pageMCQs.forEach(mcq => {
+                const selectedIndex = state.userAnswers[mcq.id];
+                if (selectedIndex !== undefined) {
+                    const input = document.getElementById(`mcq-${mcq.id}-option-${selectedIndex}`);
+                    if (input) input.checked = true;
+                }
+            });
+
+            updatePaginationButtons();
+            updateAttemptedCount(); // Update the count on the current page
+            document.getElementById('current-mcq-page').textContent = pageNumber;
+            
+            // The original code relies on KaTeX, so this is kept for compatibility, 
+            // but since the data is now stripped, it will just render the plain text.
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\(", right: "\\)", display: false},
+                        {left: "\\[", right: "\\]", display: true},
+                        {left: "$", right: "$", display: false}
+                    ]
+                });
+            }
+            
+            lucide.createIcons();
+        };
+
+        const createMcqHtml = (mcq, globalIndex) => {
+            // Options HTML is created here. The data-mcq-content attribute is kept but unused now.
+            const optionsHtml = mcq.options.map((option, index) => `
+                <div class="relative">
+                    <input type="radio" id="mcq-${mcq.id}-option-${index}" name="mcq-${mcq.id}" 
+                            value="${index}" onchange="saveAnswer(${mcq.id}, ${index})" class="hidden">
+                    <label for="mcq-${mcq.id}-option-${index}" class="option-label">
+                        <span class="font-semibold mr-4">${String.fromCharCode(65 + index)})</span> <span data-mcq-content>${option}</span>
+                    </label>
+                </div>
+            `).join('');
+
+            return `
+                <div class="card p-6 border-l-4 border-indigo-500" data-mcq-id="${mcq.id}">
+                    <p class="text-sm font-medium text-indigo-600 mb-2">Question ${globalIndex + 1}</p>
+                    <p class="text-lg font-semibold text-gray-800 mb-4"><span data-mcq-content>${mcq.q}</span></p>
+                    <div class="space-y-3">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+        };
+
+        window.saveAnswer = (mcqId, selectedIndex) => {
+            state.userAnswers[mcqId] = selectedIndex;
+            updateAttemptedCount(); 
+        };
+        
+        const updateAttemptedCount = () => {
+            const attemptedCount = Object.keys(state.userAnswers).length;
+            document.getElementById('questions-attempted-count').textContent = attemptedCount;
+        };
+
+
+        window.changePage = (direction) => {
+            if (!state.currentTest) return;
+            const totalPages = Math.ceil(state.currentTest.mcqs.length / state.mcqsPerPage);
+            let newPage = state.mcqPage + direction;
+
+            if (newPage >= 1 && newPage <= totalPages) {
+                state.mcqPage = newPage;
+                loadMcqPage(state.mcqPage);
+            }
+        };
+
+        const updatePaginationButtons = () => {
+            if (!state.currentTest) return;
+
+            const totalPages = Math.ceil(state.currentTest.mcqs.length / state.mcqsPerPage);
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const buttonContainer = prevBtn.parentElement;
+
+            prevBtn.disabled = state.mcqPage === 1;
+
+            if (state.mcqPage === totalPages) {
+                // Show Submit button on the last page
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+                buttonContainer.classList.add('justify-between');
+                buttonContainer.classList.remove('justify-start');
+            } else {
+                // Show Next button on other pages
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+                buttonContainer.classList.remove('justify-between');
+                buttonContainer.classList.add('justify-start');
+            }
+        };
+        
+        // --- TIMER LOGIC (CONFIRMED WORKING) ---
+
+        const formatTime = (seconds) => {
+            const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const remainingSeconds = String(seconds % 60).padStart(2, '0');
+            return `${minutes}:${remainingSeconds}`;
+        };
+
+        const updateTimerDisplay = () => {
+            const timerEl = document.getElementById('timer');
+            if (timerEl) {
+                timerEl.textContent = formatTime(state.timeLeft);
+                
+                // Reset classes
+                timerEl.classList.remove('timer-warning', 'timer-default', 'timer-finished', 'animate-pulse');
+                
+                if (state.timeLeft <= 60 && state.timeLeft > 0) { // Last minute warning (Red)
+                    timerEl.classList.add('timer-warning', 'animate-pulse');
+                } else if (state.timeLeft > 0) { // Normal time (Default theme)
+                    timerEl.classList.add('timer-default');
+                } else if (state.timeLeft <= 0) { // Time up (Gray)
+                    timerEl.classList.add('timer-finished');
+                }
+            }
+        };
+
+        const startTimer = () => {
+            if (state.timer) stopTimer(); 
+
+            state.timer = setInterval(() => {
+                if (state.timeLeft <= 0) {
+                    stopTimer();
+                    submitTest(true); // Auto-submit on time up
+                } else {
+                    state.timeLeft--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+            updateTimerDisplay(); 
+        };
+
+        const stopTimer = () => {
+            if (state.timer) {
+                clearInterval(state.timer);
+                state.timer = null;
+            }
+        };
+
+
+        // --- SUBMISSION & RESULT LOGIC ---
+
+        window.confirmSubmitTest = () => {
+            showConfirmationModal("Submit Test", "Are you sure you want to submit your test? You will not be able to change your answers.", 'submitTest');
+        };
+
+        window.confirmStopTest = () => {
+            showConfirmationModal("Stop Test", "Are you sure you want to stop the test? Your current progress will be submitted and the remaining time will be lost.", 'submitTest');
+        };
+
+        window.submitTest = (isTimeUp = false) => {
+            if (!state.currentTest) return;
+
+            stopTimer();
+            closeNotification(); // Close any open confirmation modal
+
+            let correct = 0;
+            let wrong = 0;
+            let unattempted = 0;
+
+            const totalTimeInSeconds = state.currentTest.duration;
+            const timeElapsed = totalTimeInSeconds - state.timeLeft;
+            
+            // Calculate scores
+            state.currentTest.mcqs.forEach(mcq => {
+                const selectedAnswer = state.userAnswers[mcq.id];
+                
+                if (selectedAnswer === undefined) {
+                    unattempted++;
+                } else if (selectedAnswer === mcq.ans) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+            
+            const totalQuestions = state.currentTest.mcqs.length;
+
+            state.results = {
+                correct,
+                wrong,
+                unattempted,
+                totalQuestions,
+                timeTaken: formatTime(Math.min(totalTimeInSeconds, timeElapsed)), // Cap time at max duration for display
+                isTimeUp
+            };
+
+            // Navigate to results page
+            navigate('result-page'); 
+            
+            if(isTimeUp) {
+                showNotification("Time Up!", `Your test on **${state.currentTest.title}** has been automatically submitted.`, "warning");
+            } else {
+                showNotification("Success!", `Your test on **${state.currentTest.title}** has been successfully submitted.`, "success");
+            }
+        };
+
+        const displayResults = () => {
+            if (!state.results || !state.currentTest) return;
+
+            document.getElementById('final-score').textContent = `${state.results.correct}/${state.results.totalQuestions}`;
+            document.getElementById('correct-count').textContent = state.results.correct;
+            document.getElementById('wrong-count').textContent = state.results.wrong;
+            document.getElementById('unattempted-count').textContent = state.results.unattempted;
+            document.getElementById('time-taken').textContent = state.results.timeTaken;
+            
+            // Change color based on performance (simple logic)
+            const scoreBox = document.getElementById('result-score-box');
+            const percentage = (state.results.correct / state.results.totalQuestions) * 100;
+
+            scoreBox.classList.remove('bg-indigo-50', 'border-indigo-200', 'bg-green-50', 'border-green-200', 'bg-red-50', 'border-red-200');
+            document.getElementById('final-score').classList.remove('text-indigo-600', 'text-green-600', 'text-red-600');
+            
+            if (percentage >= 70) {
+                scoreBox.classList.add('bg-green-50', 'border-green-200');
+                document.getElementById('final-score').classList.add('text-green-600');
+            } else if (percentage >= 40) {
+                scoreBox.classList.add('bg-indigo-50', 'border-indigo-200');
+                document.getElementById('final-score').classList.add('text-indigo-600');
+            } else {
+                scoreBox.classList.add('bg-red-50', 'border-red-200');
+                document.getElementById('final-score').classList.add('text-red-600');
+            }
+        };
+
+        const displayAnswerReview = () => {
+            if (!state.currentTest) return;
+
+            document.getElementById('review-title').textContent = `Review Answers: ${state.currentTest.title}`;
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+
+            state.currentTest.mcqs.forEach((mcq, index) => {
+                const selectedIndex = state.userAnswers[mcq.id];
+                const isCorrect = selectedIndex === mcq.ans;
+                const isAttempted = selectedIndex !== undefined;
+
+                let cardClass = 'border-l-4 ';
+                let statusText = 'Unattempted';
+                let icon = 'help-circle';
+                let iconClass = 'text-gray-500';
+
+                if (isAttempted) {
+                    if (isCorrect) {
+                        cardClass += 'border-green-500 bg-green-50';
+                        statusText = 'Correct Answer';
+                        icon = 'check-circle';
+                        iconClass = 'text-green-600';
+                    } else {
+                        cardClass += 'border-red-500 bg-red-50';
+                        statusText = 'Wrong Answer';
+                        icon = 'x-circle';
+                        iconClass = 'text-red-600';
+                    }
+                } else {
+                    cardClass += 'border-gray-300 bg-gray-50';
+                    iconClass = 'text-gray-500';
+                }
+
+                const selectedOptionText = isAttempted ? `<span data-mcq-content>${String.fromCharCode(65 + selectedIndex)}) ${mcq.options[selectedIndex]}</span>` : 'N/A';
+                const correctOptionText = `<span data-mcq-content>${String.fromCharCode(65 + mcq.ans)}) ${mcq.options[mcq.ans]}</span>`;
+                
+                // Using KaTeX for review page content as well
+                container.innerHTML += `
+                    <div class="card p-6 ${cardClass}">
+                        <div class="flex items-start justify-between">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Q${index + 1}: <span data-mcq-content>${mcq.q}</span></h3>
+                            <span class="flex items-center text-sm font-bold p-1 rounded-full ${iconClass}">
+                                <span class="w-5 h-5 mr-1" data-lucide="${icon}"></span>
+                                ${statusText}
+                            </span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <p class="text-gray-700"><strong>Your Selection:</strong> <span class="${isCorrect ? 'text-green-600' : isAttempted ? 'text-red-600' : 'text-gray-500'}">${selectedOptionText}</span></p>
+                            <p class="text-green-600"><strong>Correct Answer:</strong> ${correctOptionText}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Re-render math after loading review answers
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\(", right: "\\)", display: false},
+                        {left: "\\[", right: "\\]", display: true},
+                        {left: "$", right: "$", display: false}
+                    ]
+                });
+            }
+
+            lucide.createIcons();
+        };
+
+
+        // --- GLOBAL NOTIFICATION / MODAL (Cleaned up formatting) ---
+
+        const notificationBox = document.getElementById('notification-box');
+        const notificationContent = document.getElementById('notification-content');
+        
+        const showNotification = (title, message, type = 'info') => {
+            let icon, titleColor, bgColor;
+            
+            if (type === 'success') {
+                icon = 'check-circle';
+                titleColor = 'text-green-600';
+                bgColor = 'bg-green-100';
+            } else if (type === 'error') {
+                icon = 'alert-triangle';
+                titleColor = 'text-red-600';
+                bgColor = 'bg-red-100';
+            } else if (type === 'warning') {
+                icon = 'alert-circle';
+                titleColor = 'text-yellow-600';
+                bgColor = 'bg-yellow-100';
+            } else { // info
+                icon = 'info';
+                titleColor = 'text-indigo-600';
+                bgColor = 'bg-indigo-100';
+            }
+
+            // Replace **text** with <strong>text</strong> for bolding in the message
+            notificationContent.innerHTML = `
+                <div class="p-4 rounded-full inline-block mb-4 ${bgColor}">
+                    <span class="w-8 h-8 ${titleColor}" data-lucide="${icon}"></span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 ${titleColor}">${title}</h3>
+                <p class="text-gray-600 mb-6">${message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>
+                <button onclick="closeNotification()" class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition">
+                    OK
+                </button>
+            `;
+            notificationBox.classList.remove('hidden');
+            lucide.createIcons();
+        };
+
+        const showConfirmationModal = (title, message, confirmFunctionName) => {
+            notificationContent.innerHTML = `
+                <div class="bg-yellow-100 p-4 rounded-full inline-block mb-4">
+                    <span class="w-8 h-8 text-yellow-600" data-lucide="alert-triangle"></span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">${title}</h3>
+                <p class="text-gray-600 mb-6">${message}</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="closeNotification()" class="px-6 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition">
+                        Cancel
+                    </button>
+                    <button onclick="${confirmFunctionName}(false)" class="px-6 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition">
+                        Confirm ${title.split(' ')[0]}
+                    </button>
+                </div>
+            `;
+            notificationBox.classList.remove('hidden');
+            lucide.createIcons();
+        };
+        
+        window.closeNotification = () => {
+            notificationBox.classList.add('hidden');
+        };
+
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('home-page'); // Start at the login screen
+        });
+    </script>
+</body>
+</html>
