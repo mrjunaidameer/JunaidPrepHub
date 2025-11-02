@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junaid's Typing Master Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark GitHub-like background */
+            color: #c9d1d9; /* Light text */
+            transition: all 0.5s;
+        }
+        #typing-area {
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.8;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #30363d;
+            padding: 2rem;
+            background-color: #161b22;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            white-space: pre-wrap; /* Preserve line breaks */
+        }
+        #input-field {
+            resize: none;
+            height: 120px;
+            background-color: #0d1117;
+            border: 2px solid #30363d;
+            color: #ffffff;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.25rem;
+            padding: 1rem;
+            caret-color: #58a6ff; /* Blue cursor */
+        }
+        #input-field:focus {
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.5);
+        }
+        .correct {
+            color: #56d364; /* Green */
+        }
+        .incorrect {
+            background-color: #f85149; /* Red background */
+            color: #0d1117;
+            border-radius: 2px;
+        }
+        .current {
+            border-bottom: 2px solid #58a6ff; /* Blue underline */
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .status-box {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+        /* Hide the user's input text visually, but keep the space */
+        .hidden-input {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center p-8">
+
+    <div class="max-w-4xl w-full mx-auto">
+        <h1 class="text-4xl font-bold text-center text-white mb-8">Junaid's Typing Master 🚀</h1>
+
+        <div class="flex justify-between items-center text-center mb-6">
+            <div id="wpm" class="status-box p-4 rounded-lg flex-1 mr-4">
+                <span class="text-xl font-bold text-green-400" id="wpm-value">0</span>
+                <p class="text-sm text-gray-400">WPM</p>
+            </div>
+            <div id="accuracy" class="status-box p-4 rounded-lg flex-1 mr-4">
+                <span class="text-xl font-bold text-yellow-400" id="accuracy-value">100%</span>
+                <p class="text-sm text-gray-400">Accuracy</p>
+            </div>
+            <div id="timer" class="status-box p-4 rounded-lg flex-1">
+                <span class="text-xl font-bold text-blue-400" id="timer-value">0s</span>
+                <p class="text-sm text-gray-400">Time</p>
+            </div>
+        </div>
+        
+        <div id="typing-area" class="min-h-[200px] select-none">
+            </div>
+
+        <textarea 
+            id="input-field" 
+            class="w-full rounded-lg shadow-xl" 
+            placeholder="Start typing here..." 
+            autofocus
+            onpaste="return false;" 
+            onDrop="return false;"
+        ></textarea>
+
+        <div class="flex justify-center mt-6 space-x-4">
+            <button onclick="resetTest()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-full transition duration-200">
+                Reset Test
+            </button>
+            <button onclick="changeText()" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-full transition duration-200">
+                New Paragraph
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- TYPING TEST CORE ENGINE ---
+        
+        const TEXTS = [
+            "Junaid's Prep Hub is a platform dedicated to providing admission test preparation resources. The goal of this tool is to help students master typing skills for technical exams and everyday efficiency.",
+            "The quick brown fox jumps over the lazy dog. Programming requires precise input and rapid movement across the keyboard to maintain a fluid coding workflow. Speed and accuracy are vital for every developer.",
+            "This typing master platform is built using modern web development techniques, focusing on real-time feedback and clean performance metrics. Mastering touch typing is the first step toward advanced digital productivity.",
+            "Web development projects often involve deep focus and complex syntax. Improving your typing skill is directly correlated with an increase in coding speed and reduction in mental fatigue during long sessions.",
+            "You can press the reset button below to restart your current practice session or choose a new paragraph to test your adaptability across different content themes."
+        ];
+
+        let targetTextEl = document.getElementById('typing-area');
+        let inputField = document.getElementById('input-field');
+        let timerValueEl = document.getElementById('timer-value');
+        let wpmValueEl = document.getElementById('wpm-value');
+        let accuracyValueEl = document.getElementById('accuracy-value');
+
+        let timer = null;
+        let startTime = 0;
+        let totalTime = 0;
+        let errors = 0;
+        let totalCharsTyped = 0;
+
+        // --- Initialization ---
+
+        function chooseText() {
+            const randomIndex = Math.floor(Math.random() * TEXTS.length);
+            return TEXTS[randomIndex];
+        }
+
+        function renderText(text) {
+            targetTextEl.innerHTML = '';
+            text.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                targetTextEl.appendChild(span);
+            });
+            // Highlight the first character
+            targetTextEl.firstChild.classList.add('current');
+        }
+
+        // --- Timer Functions ---
+
+        function startTimer() {
+            startTime = Date.now();
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function updateTimer() {
+            totalTime = Math.floor((Date.now() - startTime) / 1000);
+            timerValueEl.textContent = `${totalTime}s`;
+            calculateMetrics();
+        }
+
+        // --- Metrics Calculation ---
+
+        function calculateMetrics() {
+            // Calculate WPM (Words Per Minute)
+            const minutes = totalTime / 60;
+            const grossWPM = (totalCharsTyped / 5) / minutes; // Standard WPM formula (5 chars = 1 word)
+            const netWPM = grossWPM - (errors / minutes); // Net WPM adjusted for errors
+            
+            // Calculate Accuracy
+            const correctChars = totalCharsTyped - errors;
+            const accuracy = totalCharsTyped > 0 ? (correctChars / totalCharsTyped) * 100 : 100;
+
+            if (totalTime === 0) { // Prevent division by zero at start
+                wpmValueEl.textContent = 0;
+            } else {
+                wpmValueEl.textContent = Math.max(0, Math.round(netWPM));
+            }
+            accuracyValueEl.textContent = `${Math.round(accuracy)}%`;
+        }
+        
+        // --- Input Handling ---
+
+        inputField.addEventListener('input', () => {
+            if (!timer) {
+                startTimer();
+            }
+            
+            const typedText = inputField.value;
+            totalCharsTyped = typedText.length;
+            let currentErrors = 0;
+
+            const targetChars = targetTextEl.querySelectorAll('span');
+
+            // Iterate and compare
+            targetChars.forEach((targetCharEl, index) => {
+                const targetChar = targetCharEl.textContent;
+                const typedChar = typedText[index];
+
+                targetCharEl.classList.remove('current', 'correct', 'incorrect');
+
+                if (typedChar === undefined) {
+                    // Untyped character
+                } else if (typedChar === targetChar) {
+                    targetCharEl.classList.add('correct');
+                } else {
+                    targetCharEl.classList.add('incorrect');
+                    currentErrors++;
+                }
+            });
+
+            errors = currentErrors;
+            calculateMetrics();
+
+            // Highlight the next expected character
+            const nextCharIndex = typedText.length;
+            if (nextCharIndex < targetChars.length) {
+                targetChars[nextCharIndex].classList.add('current');
+            } else if (nextCharIndex === targetChars.length) {
+                // Test finished
+                stopTest();
+            }
+        });
+        
+        // --- Control Functions ---
+
+        function stopTest() {
+            stopTimer();
+            inputField.disabled = true;
+            targetTextEl.classList.remove('current');
+            alert(`Test Finished! WPM: ${wpmValueEl.textContent}, Accuracy: ${accuracyValueEl.textContent}`);
+        }
+
+        window.resetTest = function() {
+            stopTimer();
+            inputField.value = '';
+            inputField.disabled = false;
+            
+            errors = 0;
+            totalTime = 0;
+            totalCharsTyped = 0;
+
+            timerValueEl.textContent = '0s';
+            wpmValueEl.textContent = '0';
+            accuracyValueEl.textContent = '100%';
+
+            // Re-render the existing text to clear all highlighting
+            renderText(targetTextEl.textContent.split('').map(s => s === ' ' ? ' ' : s).join(''));
+        };
+
+        window.changeText = function() {
+            resetTest();
+            renderText(chooseText());
+        };
+
+        // --- Initial Load ---
+        renderText(chooseText());
+    </script>
+</body>
+</html>
